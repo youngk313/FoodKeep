@@ -1,7 +1,3 @@
-<<<<<<< HEAD
 \nAndrey's SIN
-=======
 "noah is gone" 
->>>>>>> 98b079b03a5f8ce45a3d39583734a809c0e5ee2c
-
 hello world its hecking raining
