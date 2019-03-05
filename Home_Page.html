@@ -2,42 +2,45 @@
 <html>
   <head>
     <title>FoodKeep</title>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
       body{
         margin: 0;
         padding: 0;
       }
       #topNav {
-        height: 280px;
+        height: 100px;
         width: 100%;
       }
       #camBox, #pencilBox {
-        width: 349px;
-        height: 495px;
+        width: 35vh;
+        height: 50vh;
         margin: auto;
         display: inline-block;
-        background: rgba(196, 196, 196, 0.9);
+        background: rgba(230,230,230,0.8);
         text-align: center;
         margin-top: 70px;
       }
-      #camBox {
-        margin-right: 110px;
+      #boxGap {
+        width: 10vw;
+        display: inline-block;
       }
  
-      #choosePick{
+      #chooseOption{
         width: 100%;
         display:inline-block;
         text-align: center;
-        background-image: url(./Images/strawBerryBackground.png);
-        background-repeat: no-repeat;
-        background-size: 100% auto;
-        height: calc(100vh - 280px);
+        height: calc(100vh - 100px);
+        font-size: 2.5vh;
+        color: #99004d;
+        text-shadow: 1px 1px black;
       }
       #camCircle, #pencilCircle {
-        width: 300px;
-        height: 300px;
+        width: 30vh;
+        height: 30vh;
         clip-path: circle(50%);
-        background-color: #555555;
+        background-color: #f79693;
         margin: auto;
         margin-top: 30px;
       }
@@ -46,8 +49,24 @@
         margin-top: 45px;
       }
       .choosePics{
-        width:300px;
-        height: 300px;
+        width: 20vh;
+        height:20vh;
+        padding-top: 5vh;
+      }
+      #mainBackground {
+       width: 100%;
+        text-align: center;
+        background-image: url(./Images/strawBerryBackground.png);
+        background-repeat: no-repeat;
+        background-size: 100% 100%;
+        height: calc(100vh - 100px);
+        position: fixed;
+        z-index: -1;
+        filter: blur(6px);
+        -webkit-filter: blur(6px);
+      }
+      #pencilPic{
+        padding-left: 2vh;
       }
       
     </style>
@@ -58,18 +77,20 @@
         
       </div>
     </div>
-        <div id = "choosePick">
+        <div id = "chooseOption">
+          <div id="mainBackground"></div>
           <div id="camBox">
             <div id = "camCircle">
-              <img src="./Images/camPic.png" alt="Camera" class="choosePics"/>
+              <img src="./Images/camPic3.png" alt="Camera" class="choosePics"/>
             </div>
             <div id = "camText">
               Scan a recent grocery receipt.
             </div>
           </div>
+            <div id="boxGap"></div>
             <div id="pencilBox">
               <div id ="pencilCircle">
-                <img src ="./Images/pencilPic.png" alt="Pencil" class="choosePics">
+                <img src ="./Images/pencilPic2.png" alt="Pencil" class="choosePics" id="pencilPic">
               </div>
               <div id="pencilText">
                 Add grocery Items
