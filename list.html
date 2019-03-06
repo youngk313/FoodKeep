@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Item List</title>
+    <style>
+      #template {
+        display: none;
+        padding: 15px;
+      }
+      
+      .list-item-entry {
+        margin: .5em;
+        display: inline-block;
+        width: 50vw;
+        border: 5px solid #CCC;
+        border-radius: 10px;
+        background: #CCC;
+        box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.5);
+      }
+      
+      .list-item-entry div {
+        display: inline-block;
+      }
+      
+      .list-item-name {
+        width: 75%;
+        text-indent: 50px;
+      }
+      
+      .list-item-date {
+        width: 20%;
+        text-align: center;
+        background: #999;
+        color: white;
+        border: 5px solid #999;
+        border-radius: 5px;
+      }
+      
+      .remove-button {
+        display: inline-block;
+      }
+    </style>
+  </head>
+  <body>
+    <input type="text" name="firstname" id="item-name"/> <button id="add">Add</button>
+    <br/><br/><br/>
+    <div id="cont-test">
+      <div class="list-item" id="template">
+        <div class="list-item-entry">
+          <div class="list-item-name"></div>
+          <div class="list-item-date">February 26</div>
+        </div>
+        <button class="remove-button">Remove</button>
+      </div>
+      
+    </div>
+    
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.3/jquery-ui.min.js"></script>
+    <script>
+      var count = 1;
+      var items = [];
+      $("#add").click(function() {
+        var itemName = $('#item-name').val();
+        $('#item-name').val("");
+        var newItem = $("#template").clone().css("display", "block").attr('id', count).appendTo("#cont-test");
+        $("#" + count + " .list-item-name").append(itemName);
+        $("#" + count + " .remove-button").attr("id", count);
+        
+        //remove button function
+        $(".remove-button").click(function() {
+          var id = $(this).attr('id');
+          $("#" + id).remove();
+        });
+        count++;
+      });
+
+    </script>
+    
+  </body>
+</html>
