@@ -23,16 +23,14 @@
         -webkit-transition-duration: 0.4s;
         transition-duration: 0.4s;
         display: block;
-        width: 20vh;
+        width: 20vw;
         margin: auto;
-        margin-top: 1vh;
+        margin-top: 1vw;
       }
-      .buttonCatagory:hover {
+      .buttonCatagory:hover, .choice:hover, #yesAdd:hover, #noAdd:hover {
         box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24),0 17px 50px 0 rgba(0,0,0,0.19);
       }
-      .choice:hover {
-        box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24),0 17px 50px 0 rgba(0,0,0,0.19);
-      }
+
       .choice {
         background-color: #bf4040;
         border: none;
@@ -48,14 +46,15 @@
         transition-duration: 0.4s;
         display: block;
         margin: auto;
-        width: 18vh;
-        margin-top: 1vh;
+        width: 18vw;
+        margin-top: 1vw;
       }
       #buttonArea{
         background-color: #b3dceb;
+        margin-top: 150px;
         float: left;
-        width: 25vh;
-        height: 100vh;
+        width: 25vw;
+        height: calc(100vh - 150px);
 				overflow-y: scroll;
 				text-align: center;
       }
@@ -63,6 +62,58 @@
     		display: none;
 				
 			}
+      #checkAdd{
+        width: 40vw;
+        height: 11vh;
+        background-color: #dddddd;
+        z-index: 1;
+        position: absolute;
+        margin: auto;
+        left: 30vw;
+        top: calc(15vh + 150px);
+        display: none;
+        font-size: 1.1vw;
+        border: solid black 1px;
+        padding-top: 2vh;
+        
+        
+        
+      }
+      #yesAdd, #noAdd{
+        
+        border: none;
+        color: white;
+        padding: 1vw 1.5vw;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 2.5vh;
+        cursor: pointer;
+        -webkit-transition-duration: 0.4s;
+        transition-duration: 0.4s;
+        display: inline-block;
+        margin: 1vh;
+        width: 6vw;
+        float: right;
+        
+        
+        
+        
+      }
+      
+      #noAdd{
+        background-color: darkred;
+      }
+      
+      #yesAdd{
+        background-color: forestgreen;
+      }
+      .areU{
+        float: left;
+        margin: 1vh;
+        margin-top:  3vh;
+      }
+      
     </style>
   </head>
   <body>
@@ -80,7 +131,8 @@
         <button id="banana" class="choice">Banana</button>
         <button id="pear" class="choice">Pear</button>
     </div>
-
+    <div id="checkAdd">
+    </div>
    
 
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
@@ -88,27 +140,97 @@
     <script>
     /*<![CDATA[*/
         $(document).ready(function() {
-            $("#milk1").toggle("blind");
-            $("#milk2").toggle("blind");
-            $("#milk3").toggle("blind");
-            $("#milk4").toggle("blind");
-            $("#apple").toggle("blind");
-            $("#orange").toggle("blind");
-            $("#banana").toggle("blind");
-            $("#pear").toggle("blind");
+          var addName;
+          $("#milk1").toggle("blind");
+          $("#milk2").toggle("blind");
+          $("#milk3").toggle("blind");
+          $("#milk4").toggle("blind");
+          $("#apple").toggle("blind");
+          $("#orange").toggle("blind");
+          $("#banana").toggle("blind");
+          $("#pear").toggle("blind");
           
-            $("#in1").click(function() {
-              $("#milk1").toggle("blind");
+          $("#in1").click(function() {
+            $("#milk1").toggle("blind");
+            $("#milk1").click(function() {
+              document.getElementById("checkAdd").style.display = "inline-block";
+              addName = "1% Milk";
+              checkAdd.innerHTML = "<span class=\"areU\">Are you sure you want to add " + addName + " to your List? </span><button id=\"yesAdd\">Yes</button><button id=\"noAdd\">No</button>"
+              $("#noAdd").click(function() {
+              document.getElementById("checkAdd").style.display = "none";
+              });
+            });
               $("#milk2").toggle("blind");
+                $("#milk2").click(function() {
+                  document.getElementById("checkAdd").style.display = "inline-block";
+                  addName = "2% Milk";
+                  checkAdd.innerHTML = "<span class=\"areU\">Are you sure you want to add " + addName + " to your List? </span><button id=\"yesAdd\">Yes</button><button id=\"noAdd\">No</button>"
+                  $("#noAdd").click(function() {
+                    document.getElementById("checkAdd").style.display = "none";
+                  });
+                });
               $("#milk3").toggle("blind");
+                $("#milk3").click(function() {
+                  document.getElementById("checkAdd").style.display = "inline-block";
+                  addName = "3% Milk";
+                  checkAdd.innerHTML = "<span class=\"areU\">Are you sure you want to add " + addName + " to your List? </span><button id=\"yesAdd\">Yes</button><button id=\"noAdd\">No</button>"
+                  $("#noAdd").click(function() {
+                    document.getElementById("checkAdd").style.display = "none";
+                });
+              });
               $("#milk4").toggle("blind");
+                $("#milk4").click(function() {
+                  document.getElementById("checkAdd").style.display = "inline-block";
+                  addName = "4% Milk";
+                  checkAdd.innerHTML = "<span class=\"areU\">Are you sure you want to add " + addName + " to your List? </span><button id=\"yesAdd\">Yes</button><button id=\"noAdd\">No</button>"
+                  $("#noAdd").click(function() {
+                    document.getElementById("checkAdd").style.display = "none";
+                  });
+              });
             });
           
             $("#in2").click(function() {
                 $("#apple").toggle("blind");
+                  $("#apple").click(function() {
+                    document.getElementById("checkAdd").style.display = "inline-block";
+                    addName = "Apples";
+                    checkAdd.innerHTML = "<span class=\"areU\">Are you sure you want to add " + addName + " to your List? </span><button id=\"yesAdd\">Yes</button><button id=\"noAdd\">No</button>"
+                    $("#noAdd").click(function() {
+                      document.getElementById("checkAdd").style.display = "none";
+                    });
+                  });
                 $("#orange").toggle("blind");
+                  $("#orange").click(function() {
+                    document.getElementById("checkAdd").style.display = "inline-block";
+                    addName = "Oranges";
+                    checkAdd.innerHTML = "<span class=\"areU\">Are you sure you want to add " + addName + " to your List? </span><button id=\"yesAdd\">Yes</button><button id=\"noAdd\">No</button>"
+                    $("#noAdd").click(function() {
+                      document.getElementById("checkAdd").style.display = "none";
+                    });
+                  }); 
                 $("#banana").toggle("blind");
+                  $("#banana").click(function() {
+                    document.getElementById("checkAdd").style.display = "inline-block";
+                    addName = "Bananas";
+                    checkAdd.innerHTML = "<span class=\"areU\">Are you sure you want to add " + addName + " to your List? </span><button id=\"yesAdd\">Yes</button><button id=\"noAdd\">No</button>"
+                    $("#noAdd").click(function() {
+                      document.getElementById("checkAdd").style.display = "none";
+                    });
+                 });
                 $("#pear").toggle("blind");
+                  $("#pear").click(function() {
+                    document.getElementById("checkAdd").style.display = "inline-block";
+                    addName = "Pears";
+                    checkAdd.innerHTML = "<span class=\"areU\">Are you sure you want to add " + addName + " to your List? </span><button id=\"yesAdd\">Yes</button><button id=\"noAdd\">No</button>"
+                    $("#noAdd").click(function() {
+                      document.getElementById("checkAdd").style.display = "none";
+                    });
+                  });
+              $("#yesAdd").click(function() {
+                
+              });
+              
+          
               });
 
         });
