@@ -19,9 +19,11 @@ body {
   background-color: forestgreen;
   width: 25vw;
   height: 80vh;
-  display: flex;
-  flex-flow: column;
-  align-items: stretch;
+  overflow: auto;
+}
+
+#add-item-menu::-webkit-scrollbar { 
+  display: none;				
 }
 
 #item-list {
@@ -35,18 +37,19 @@ body {
 }
 
 #add-item-menu .submenu {
+  display: block;
+}
+
+#add-item-menu .choice {
   display: none;
+  width: 70%;
+  margin: .5em 0 .5em 15%;
 }
 
 #add-item-menu .spoiler {
   display: block;
-  margin: 1em;
-}
-
-#add-item-menu .submenu button {
-  display: block;
-  width: 70%;
-  margin: 1em 0 1em 15%;
+  width: 90%;
+  margin: 1em 0 1em 5%;
 }
   
 #template {
@@ -87,4 +90,8 @@ body {
 
 .remove-button {
   display: inline-block;
+}
+
+.veggies-items {
+  display: none;
 }

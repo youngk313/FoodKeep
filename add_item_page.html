@@ -9,20 +9,23 @@
     <div id="content">
       <div id="add-item-menu">
         <!-- collapsable menu -->
-        <input id="jq-ui-test" value="Dairy" type="button" class="dairy spoiler">
-        <div id="dairy-item-menu" class="submenu">
-          <button id="milk1" class="choice">1% Milk</button>
-          <button id="milk2" class="choice">2% Milk</button>
-          <button id="milk3" class="choice">3% Milk</button>
-          <button id="milk4" class="choice">4% Milk</button>
-        </div>
-        <input value="Fruits" type="button" class="fruits spoiler">
-        <div id="fruits-item-menu" class="submenu">
-          <button id="apple" class="choice">Apple</button>
-          <button id="orange" class="choice">Orange</button>
-          <button id="banana" class="choice">Banana</button>
-          <button id="pear" class="choice">Pear</button>
-        </div>
+        <button class="dairy spoiler">Dairy</button>
+        <button id="milk1" class="dairy-item choice">1% Milk</button>
+        <button id="milk2" class="dairy-item choice">2% Milk</button>
+        <button id="milk3" class="dairy-item choice">3% Milk</button>
+        <button id="milk4" class="dairy-item choice">4% Milk</button>
+        
+        <button class="fruits spoiler">Fruits</button>
+        <button id="apple" class="fruits-item choice">Apple</button>
+        <button id="orange" class="fruits-item choice">Orange</button>
+        <button id="banana" class="fruits-item choice">Banana</button>
+        <button id="pear" class="fruits-item choice">Pear</button>
+        
+        <button class="veggies spoiler">Veggies</button>
+        <button id="apple" class="veggies-item choice">Apple</button>
+        <button id="orange" class="veggies-item choice">Orange</button>
+        <button id="banana" class="veggies-item choice">Banana</button>
+        <button id="pear" class="veggies-item choice">Pear</button>
       </div>
       <div id="item-list">
         <div id="cont-test">
@@ -43,7 +46,6 @@
     
     <link rel="stylesheet" href="./jquery-ui/jquery-ui.css">
     <script src="./jquery-ui/jquery-ui.js"></script>
-    
     <!-- jquery-ui auto button style -->
     <script>$('.choice, .spoiler, .remove-button').button();</script>
     
@@ -51,7 +53,8 @@
     <script>
       $('.spoiler').click(function() {
         var item = $(this).attr('class').split(' ')[0];
-        $(this).parents('#add-item-menu').find('#' + item + '-item-menu').slideToggle(200);
+        console.log(item);
+        $(this).parents('#add-item-menu').find('.' + item + '-item').slideToggle(200);
       });
     </script>
     
