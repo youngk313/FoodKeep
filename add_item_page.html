@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>FoodKeep</title>
+    <link rel="stylesheet" href="./add_item_style.css">
+  </head>
+  <body>
+    <div id="top-nav"></div>
+    <div id="content">
+      <div id="add-item-menu">
+        <!-- collapsable menu -->
+        <input id="jq-ui-test" value="Dairy" type="button" class="dairy spoiler">
+        <div id="dairy-item-menu" class="submenu">
+          <button id="milk1" class="choice">1% Milk</button>
+          <button id="milk2" class="choice">2% Milk</button>
+          <button id="milk3" class="choice">3% Milk</button>
+          <button id="milk4" class="choice">4% Milk</button>
+        </div>
+        <input value="Fruits" type="button" class="fruits spoiler">
+        <div id="fruits-item-menu" class="submenu">
+          <button id="apple" class="choice">Apple</button>
+          <button id="orange" class="choice">Orange</button>
+          <button id="banana" class="choice">Banana</button>
+          <button id="pear" class="choice">Pear</button>
+        </div>
+      </div>
+      <div id="item-list">
+        <div id="cont-test">
+          <!-- new list item entry template -->
+          <div class="list-item" id="template">
+            <div class="list-item-entry">
+              <div class="list-item-name"></div>
+              <div class="list-item-date">February 26</div>
+            </div>
+            <button class="remove-button">Remove</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.3/jquery-ui.min.js"></script>
+    
+    <link rel="stylesheet" href="./jquery-ui/jquery-ui.css">
+    <script src="./jquery-ui/jquery-ui.js"></script>
+    
+    <!-- jquery-ui auto button style -->
+    <script>$('.choice, .spoiler, .remove-button').button();</script>
+    
+    <!-- collapse menu script -->
+    <script>
+      $('.spoiler').click(function() {
+        var item = $(this).attr('class').split(' ')[0];
+        $(this).parents('#add-item-menu').find('#' + item + '-item-menu').slideToggle(200);
+      });
+    </script>
+    
+    <!-- add item script -->
+    <script>
+      var count = 1;
+      $(".choice").click(function() {
+        var itemName = $(this).text();
+        console.log(itemName);
+        var newItem = $("#template").clone().css("display", "block").attr('id', count).appendTo("#cont-test");
+        $("#" + count + " .list-item-name").append(itemName);
+        $("#" + count + " .remove-button").attr("id", count);
+        
+        //remove button function (added for each item)
+        $(".remove-button").click(function() {
+          var id = $(this).attr('id');
+          $("#" + id).remove();
+        });
+        count++;
+      });
+    </script>
+  </body>
+</html>

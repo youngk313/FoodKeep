@@ -1,0 +1,90 @@
+body {
+  margin: 0;
+  padding: 0;
+}
+
+#top-nav {
+  background-color: orangered;
+  height: 100px;
+  width: 100%;
+}
+
+#content {
+  display: flex;
+  justify-content: center;
+}
+
+#add-item-menu {
+  padding: 1em;
+  background-color: forestgreen;
+  width: 25vw;
+  height: 80vh;
+  display: flex;
+  flex-flow: column;
+  align-items: stretch;
+}
+
+#item-list {
+  padding: 2em;
+  background-color: yellow;
+  width: 75vw;
+  height: 100vhz;
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+}
+
+#add-item-menu .submenu {
+  display: none;
+}
+
+#add-item-menu .spoiler {
+  display: block;
+  margin: 1em;
+}
+
+#add-item-menu .submenu button {
+  display: block;
+  width: 70%;
+  margin: 1em 0 1em 15%;
+}
+  
+#template {
+  display: none;
+}
+
+.list-item {
+  padding: .5em;
+}
+
+.list-item-entry {
+  margin: .5em;
+  display: inline-block;
+  width: 50vw;
+  border: 5px solid #CCC;
+  border-radius: 10px;
+  background: #CCC;
+  box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.5);
+}
+
+.list-item-entry div {
+  display: inline-block;
+}
+
+.list-item-name {
+  width: 75%;
+  text-indent: 50px;
+}
+
+.list-item-date {
+  width: 20%;
+  text-align: center;
+  background: #999;
+  color: white;
+  border: 5px solid #999;
+  border-radius: 5px;
+}
+
+.remove-button {
+  display: inline-block;
+}
