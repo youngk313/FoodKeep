@@ -1,14 +1,13 @@
-
+var exday;
 function createItem(addName){
   var today = new Date();
   var dd = today.getDate();
-  var mm = today.getMonth();
+  var mm = today.getMonth() + 1;
   var year = today.getFullYear();
-  var exday = dd + 14;
   var myItem = {
     "name": addName,
     "number": 1,
-    "date": dd + '/' + mm + '/' + year,
+    "date": mm + '/' + dd + '/' + year,
     "added": true,
     "expdate": exday + '/' + mm + '/' + year,
     "expired": false,
@@ -16,7 +15,11 @@ function createItem(addName){
   }
   return myItem;
 }
-
+function addDays(date, days) {
+    var result = new Date(date);
+    result.setDate(result.getDate() + days);
+    return result;
+  }
 function changeExpDate(myItem, expirydate){
   myItem.expdate = expirydate;
 }
