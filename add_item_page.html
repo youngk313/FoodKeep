@@ -2,10 +2,35 @@
 <html>
   <head>
     <title>FoodKeep</title>
+    <!-- AuthUI API -->
+    <script src="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.js"></script>
+    <link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.css" />
+    
+    <!-- Firebase API -->
+    <script src="https://www.gstatic.com/firebasejs/5.5.8/firebase.js"></script>
+    <script src="./database/setup_firebase.js"></script>
+    
+    <!-- JQuery API -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    
+    <!-- JQueryUI API and stylesheet -->
+    <link rel="stylesheet" href="./jquery-ui/jquery-ui.css">
+    <script src="./jquery-ui/jquery-ui.js"></script>
+    
+    <!-- Local stylesheet -->
     <link rel="stylesheet" href="./add_item_style.css">
+    <link rel="stylesheet" href = "./wip/home.css">
   </head>
   <body>
-    <div id="top-nav"></div>
+    <div id="header">
+      <div id="title">Food Keep</div>
+      <div id="nav">Home | Stats | My Items</div>
+      <div id="login"><a href="#" id="login-anchor">Log In</a><a href="#" id="logout-anchor">Log Out</a></div>
+    </div>
+    <div id="login-dialog" title="Log In">
+      <div id="firebaseui-auth-container"></div>
+      <div id="loader">Loading...</div>
+    </div>
     <div id="content">
       <div id="add-item-menu">
         <!-- collapsable menu -->
@@ -47,6 +72,16 @@
     <link rel="stylesheet" href="./jquery-ui/jquery-ui.css">
     <script src="./jquery-ui/jquery-ui.js"></script>
     
+    <script src="./database/on_login_events.js"></script>
+    <script>
+      $( function() {
+        $( "#login-dialog" ).dialog({
+          autoOpen: false,
+          draggable: false
+        });
+      });
+    </script>
+    
     <!-- jquery-ui auto button style -->
     <script>$('.choice, .spoiler, .remove-button').button();</script>
     
@@ -58,22 +93,34 @@
       });
     </script>
     
+    
     <!-- add item script -->
     <script>
-      var count = 1;
       $(".choice").click(function() {
         var itemName = $(this).text();
-        console.log(itemName);
-        var newItem = $("#template").clone().css("display", "block").attr('id', count).appendTo("#cont-test");
-        $("#" + count + " .list-item-name").append(itemName);
-        $("#" + count + " .remove-button").attr("id", count);
+        var uniqueId = 'id' + Date.now();
+        console.log(uniqueId);
+        var newItem = $("#template").clone().css("display", "block").attr('id', uniqueId).appendTo("#cont-test");
+        $("#" + uniqueId + " .list-item-name").append(itemName);
+        $("#" + uniqueId + " .remove-button").attr("id", uniqueId);
+        var user = firebase.auth().currentUser;
+        if (user) {
+          console.log("hello " + itemName);
+          firebase.database().ref("users/" + user.uid + "/list/" + uniqueId).update(
+            {
+              "item" : itemName,
+              "actualExpiry" : "testing123"
+            });
+        }
+        
         
         //remove button function (added for each item)
         $(".remove-button").click(function() {
           var id = $(this).attr('id');
           $("#" + id).remove();
+          var user = firebase.auth().currentUser;
+          firebase.database().ref("users/" + user.uid + "/list/").child(id).remove();
         });
-        count++;
       });
     </script>
   </body>
