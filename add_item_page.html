@@ -46,6 +46,7 @@
     
     <link rel="stylesheet" href="./jquery-ui/jquery-ui.css">
     <script src="./jquery-ui/jquery-ui.js"></script>
+    
     <!-- jquery-ui auto button style -->
     <script>$('.choice, .spoiler, .remove-button').button();</script>
     
@@ -53,8 +54,7 @@
     <script>
       $('.spoiler').click(function() {
         var item = $(this).attr('class').split(' ')[0];
-        console.log(item);
-        $(this).parents('#add-item-menu').find('.' + item + '-item').slideToggle(200);
+        $(this).parents('#add-item-menu').find('.' + item + '-item').fadeToggle();
       });
     </script>
     
