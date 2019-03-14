@@ -1,12 +1,9 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto');
+
 body {
   margin: 0;
   padding: 0;
-}
-
-#top-nav {
-  background-color: orangered;
-  height: 100px;
-  width: 100%;
+  font-family: 'Roboto', sans-serif;
 }
 
 #content {
@@ -14,26 +11,33 @@ body {
   justify-content: center;
 }
 
+#item-list {
+  padding: 2em;
+  background-color: #1F7A8C;
+  width: 75vw;
+  height: 100vh;
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+}
+
 #add-item-menu {
+
   padding: 1em;
-  background-color: forestgreen;
+  background-color: #4792A0;
+  
   width: 25vw;
-  height: 80vh;
+  height: 100vh;
   overflow: auto;
+  
+  /* Bringing it forward to show shadow */
+  position: relative;
+  z-index: 5;
+  box-shadow: 3px 0 5px rgba(0, 0, 0, .2);
 }
 
 #add-item-menu::-webkit-scrollbar { 
   display: none;				
-}
-
-#item-list {
-  padding: 2em;
-  background-color: yellow;
-  width: 75vw;
-  height: 100vhz;
-  display: flex;
-  flex-flow: column;
-  align-items: center;
 }
 
 #add-item-menu .submenu {

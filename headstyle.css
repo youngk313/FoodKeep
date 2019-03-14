@@ -1,8 +1,8 @@
 /*Id selectors */
 
-@media screen and (min-width: 1560px){
+@media screen and (min-width: 1160px){
 #banner{
-  width:100%;
+  width: 100%;
   height: 120px;
   background-color: #f79693;
   color: white;
