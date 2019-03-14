@@ -1,0 +1,32 @@
+{
+  "Dairy" : [
+              {
+                "name" : "Milk",
+                "averageExpiry" : "12"
+              },
+              {
+                "name" : "Yoghurt",
+                "averageExpiry" : "28"
+              },
+              {
+                "name" : "Soy Milk",
+                "averageExpiry" : "7"
+              }
+            ]
+},
+{
+  "vegetables" : [
+              {
+                "name" : "Broccoli",
+                "averageExpiry" : "10"
+              },
+              {
+                "name" : "Asparagus",
+                "averageExpiry" : "6"
+              },
+              {
+                "name" : "Eggplant",
+                "averageExpiry" : "18"
+              }
+            ]
+}

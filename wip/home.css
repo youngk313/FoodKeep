@@ -1,0 +1,26 @@
+#header {
+  display: flex;
+  height: 100px;
+  text-align: center;
+}
+#header > div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+#nav {
+  width: 50%;
+  background: orangered;
+}
+#title {
+  width: 25%;
+  background: darkgoldenrod;
+}
+#login {
+  width: 25%;
+  background: darkred;
+}
+
+#login-anchor, #logout-anchor {
+  color: aqua;
+}
