@@ -1,14 +1,13 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>FoodKeep</title>
+    <title>Food Keep</title>
     <!-- AuthUI API -->
     <script src="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.js"></script>
     <link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.css" />
     
     <!-- Firebase API -->
     <script src="https://www.gstatic.com/firebasejs/5.5.8/firebase.js"></script>
-    <script src="./database/setup_firebase.js"></script>
     
     <!-- JQuery API -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
@@ -17,23 +16,27 @@
     <link rel="stylesheet" href="./jquery-ui/jquery-ui.css">
     <script src="./jquery-ui/jquery-ui.js"></script>
     
-    <!-- Local stylesheet -->
+    <!-- Local stylesheets -->
     <link rel="stylesheet" href="./add_item_style.css">
-    <link rel="stylesheet" href = "./wip/home.css">
+    <link rel="stylesheet" href = "./simple_header.css">
   </head>
   <body>
     <div id="header">
       <div id="title">Food Keep</div>
-      <div id="nav">Home | Stats | My Items</div>
-      <div id="login"><a href="#" id="login-anchor">Log In</a><a href="#" id="logout-anchor">Log Out</a></div>
+      <div id="nav">
+        <div id="nav-home"><a href="./home.html" class="anchor">Home</a></div>
+        <div id="nav-stats"><a href="#" class="anchor">Stats</a></div>
+        <div id="nav-list" style="border-top: 3px solid #193E4B;border-bottom: 3px solid white;"><a href="./add_item_page.html" class="anchor">My List</a></div>
+      </div>
+      <div id="login"><a href="#" id="login-anchor" class="anchor">Login</a><a href="#" id="logout-anchor" class="anchor">Sign Out</a><a href="#" class="anchor">Settings</a></div>
     </div>
     <div id="login-dialog" title="Log In">
       <div id="firebaseui-auth-container"></div>
-      <div id="loader">Loading...</div>
+      <!--<div id="loader">Loading...</div>-->
     </div>
     <div id="content">
       <div id="add-item-menu">
-        <!-- collapsable menu -->
+        <!-- Collapsable Menu -->
         <button class="dairy spoiler">Dairy</button>
         <button id="milk1" class="dairy-item choice">1% Milk</button>
         <button id="milk2" class="dairy-item choice">2% Milk</button>
@@ -53,26 +56,28 @@
         <button id="pear" class="veggies-item choice">Pear</button>
       </div>
       <div id="item-list">
-        <div id="cont-test">
-          <!-- new list item entry template -->
-          <div class="list-item" id="template">
-            <div class="list-item-entry">
-              <div class="list-item-name"></div>
-              <div class="list-item-date">February 26</div>
-            </div>
-            <button class="remove-button">Remove</button>
+        <a href="#" id="update-div" class="anchor">Update! <span style="color:white; font-size: .75em;">(will update the list from database if logged in)</span></a>
+        <!-- New list item entry template -->
+        <div class="list-item" id="template">
+          <div class="list-item-entry">
+            <div class="list-item-name"></div>
+            <div class="list-item-date">February 26</div>
           </div>
+          <button class="remove-button">Remove</button>
+        </div>
+        <div id="item-container">
+          <!-- New list items go here! -->
         </div>
       </div>
     </div>
     
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.3/jquery-ui.min.js"></script>
+    <!------------- SCRIPTS ------------->
     
-    <link rel="stylesheet" href="./jquery-ui/jquery-ui.css">
-    <script src="./jquery-ui/jquery-ui.js"></script>
-    
+    <!-- Firebase linking and auth scripts -->
+    <script src="./database/setup_firebase.js"></script>
     <script src="./database/on_login_events.js"></script>
+    
+    <!-- JQuery-UI auto dialog style -->
     <script>
       $( function() {
         $( "#login-dialog" ).dialog({
@@ -82,45 +87,75 @@
       });
     </script>
     
-    <!-- jquery-ui auto button style -->
-    <script>$('.choice, .spoiler, .remove-button').button();</script>
+    <!-- JQuery-UI auto button style -->
+    <script>$('.choice, .spoiler, .remove-button, .generic-button').button();</script>
     
-    <!-- collapse menu script -->
+    <!-- Event handler for menu collapse -->
     <script>
       $('.spoiler').click(function() {
-        var item = $(this).attr('class').split(' ')[0];
+        let item = $(this).attr('class').split(' ')[0];
         $(this).parents('#add-item-menu').find('.' + item + '-item').fadeToggle();
       });
     </script>
     
-    
-    <!-- add item script -->
+    <!-- Event handler for the Update button (test purposes) -->
     <script>
-      $(".choice").click(function() {
-        var itemName = $(this).text();
-        var uniqueId = 'id' + Date.now();
-        console.log(uniqueId);
-        var newItem = $("#template").clone().css("display", "block").attr('id', uniqueId).appendTo("#cont-test");
+      $('#update-div').click(function() {
+        let currUser = firebase.auth().currentUser;
+        $('#item-container').empty();
+        updateMe(currUser);
+      });
+    </script>
+    
+    <!-- Function to refresh the list (used for Update button and executed on login/logout) -->
+    <script>
+      function updateMe(user) {
+        if (user) {
+          let listRef = firebase.database().ref("users/" + user.uid + '/list');
+          listRef.once('value').then(function(snapshot) {
+            snapshot.forEach(function(childSnapshot) {
+              let jsonItem = childSnapshot.val();
+              let retreivedName = jsonItem['itemName'];
+              let itemId = childSnapshot.key;
+              addItemElement(itemId, retreivedName);
+            });
+          });
+        }
+      }
+    </script>
+    
+    <!-- Function that appends a new list item based on the #template (must generate unique id before using) -->
+    <script>
+      function addItemElement(uniqueId, itemName) {
+        $("#template").clone().css("display", "block").attr('id', uniqueId).appendTo("#item-container");
         $("#" + uniqueId + " .list-item-name").append(itemName);
         $("#" + uniqueId + " .remove-button").attr("id", uniqueId);
-        var user = firebase.auth().currentUser;
-        if (user) {
-          console.log("hello " + itemName);
-          firebase.database().ref("users/" + user.uid + "/list/" + uniqueId).update(
-            {
-              "item" : itemName,
-              "actualExpiry" : "testing123"
-            });
-        }
         
-        
-        //remove button function (added for each item)
+        //Event handler for remove item button
         $(".remove-button").click(function() {
-          var id = $(this).attr('id');
+          let id = $(this).attr('id');
           $("#" + id).remove();
-          var user = firebase.auth().currentUser;
+          let user = firebase.auth().currentUser;
           firebase.database().ref("users/" + user.uid + "/list/").child(id).remove();
         });
+      }
+    </script>
+    
+   <!-- Event handler for item choices that uses addItemElement function -->
+    <script>
+      $(".choice").click(function() {
+        let pulledName = $(this).text();
+        console.log("pulledName: " + pulledName);
+        let newId = 'id' + Date.now();
+        addItemElement(newId, pulledName);
+        let user = firebase.auth().currentUser;
+        if (user) {
+          firebase.database().ref("users/" + user.uid + "/list/" + newId).update(
+            {
+              "itemName" : pulledName,
+              "actualExpiry" : "February 26"
+            });
+        }
       });
     </script>
   </body>

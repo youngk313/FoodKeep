@@ -1,3 +1,17 @@
+function updateMe(user) {
+  if (user) {
+    let listRef = firebase.database().ref("users/" + user.uid + '/list');
+    listRef.once('value').then(function(snapshot) {
+      snapshot.forEach(function(childSnapshot) {
+        let jsonItem = childSnapshot.val();
+        let retreivedName = jsonItem['itemName'];
+        let itemId = childSnapshot.key;
+        addItemElement(itemId, retreivedName);
+      });
+    });
+  }
+}
+
 (function() {
   // Initialize the FirebaseUI Widget using Firebase.
   var ui = new firebaseui.auth.AuthUI(firebase.auth());
@@ -10,11 +24,8 @@
                    function(authResult, redirectUrl) {
                      $( "#login-dialog" ).dialog("close");
                      return true;
-                   },
-
-  // The widget is rendered.
-  // Hide the loader.
-  uiShown: function() { document.getElementById('loader').style.display = 'none';} },
+                   }
+                  },
   // Will use popup for IDP Providers sign-in flow instead of the default, redirect.
   signInFlow: 'popup',
   signInSuccessUrl: '#',
@@ -26,25 +37,31 @@
   ui.start('#firebaseui-auth-container', uiConfig);
 })();
 
-
 (function() {
   firebase.auth().onAuthStateChanged(function(user) {
     if (user) {
-      firebase.database().ref("users/"+user.uid).update(
+      //Log In...
+      var promise = firebase.database().ref("users/"+user.uid).update(
           {
-          "name": user.displayName, 
+          "name": user.displayName,
            "email": user.email
           });
       $('#login-anchor').hide();
       $('#logout-anchor').show();
-      // ...
+      $('#item-container').empty();
+      promise.then(function() { 
+        updateMe(user);
+      });
     } else {
+      //Log Out...
       $('#logout-anchor').hide();
       $('#login-anchor').show();
+      $('#item-container').empty();
     }
   });
 })();
 
+//Event handlers for Log In and Log Out buttons
 (function() {
     $('#login-anchor').click(function() {
       $( "#login-dialog" ).dialog("open");

@@ -4,77 +4,40 @@
     <title>FoodKeep</title>
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <style>
-      body{
-        margin: 0;
-        padding: 0;
-      }
-      #topNav {
-        height: 100px;
-        width: 100%;
-      }
-      #camBox, #pencilBox {
-        width: 35vh;
-        height: 50vh;
-        margin: auto;
-        display: inline-block;
-        background: rgba(230,230,230,0.8);
-        text-align: center;
-        margin-top: 70px;
-      }
-      #boxGap {
-        width: 10vw;
-        display: inline-block;
-      }
- 
-      #chooseOption{
-        width: 100%;
-        display:inline-block;
-        text-align: center;
-        height: calc(100vh - 100px);
-        font-size: 2.5vh;
-        color: #99004d;
-        text-shadow: 1px 1px black;
-      }
-      #camCircle, #pencilCircle {
-        width: 30vh;
-        height: 30vh;
-        clip-path: circle(50%);
-        background-color: #f79693;
-        margin: auto;
-        margin-top: 30px;
-      }
-      
-      #camText, #pencilText {
-        margin-top: 45px;
-      }
-      .choosePics{
-        width: 20vh;
-        height:20vh;
-        padding-top: 5vh;
-      }
-      #mainBackground {
-       width: 100%;
-        text-align: center;
-        background-image: url(./Images/strawBerryBackground.png);
-        background-repeat: no-repeat;
-        background-size: 100% 100%;
-        height: calc(100vh - 100px);
-        position: fixed;
-        z-index: -1;
-        filter: grayscale(50%);
-      }
-      #pencilPic{
-        padding-left: 2vh;
-      }
-      
-    </style>
+    
+    <!-- AuthUI API -->
+    <script src="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.js"></script>
+    <link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.css" />
+    
+    <!-- Firebase API -->
+    <script src="https://www.gstatic.com/firebasejs/5.5.8/firebase.js"></script>
+    
+    <!-- JQuery API -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    
+    <!-- JQueryUI API and stylesheet -->
+    <link rel="stylesheet" href="./jquery-ui/jquery-ui.css">
+    <script src="./jquery-ui/jquery-ui.js"></script>
+    
+    <!-- Local stylesheets -->
+    <link rel="stylesheet" href = "./simple_header.css">
+    <link rel="stylesheet" href = "./homestyle.css">
   </head>
   <body>
     <div id="content">
-      <div id="topNav">
-        
+    <div id="header">
+      <div id="title">Food Keep</div>
+      <div id="nav">
+        <div id="nav-home" style="border-top: 3px solid #193E4B;border-bottom: 3px solid white;"><a href="./home.html" class="anchor">Home</a></div>
+        <div id="nav-stats"><a href="#" class="anchor">Stats</a></div>
+        <div id="nav-list"><a href="./add_item_page.html" class="anchor">My List</a></div>
       </div>
+      <div id="login"><a href="#" id="login-anchor" class="anchor">Login</a><a href="#" id="logout-anchor" class="anchor">Sign Out</a><a href="#" class="anchor">Settings</a></div>
+    </div>
+    <div id="login-dialog" title="Log In">
+    <div id="firebaseui-auth-container"></div>
+      <!--<div id="loader">Loading...</div>-->
+    </div>
     </div>
         <div id = "chooseOption">
           <div id="mainBackground"></div>
@@ -96,7 +59,20 @@
               </div>
             </div>
           </div>
-        
+    
+    <!-- Firebase linking and auth scripts -->
+    <script src="./database/setup_firebase.js"></script>
+    <script src="./database/on_login_events.js"></script>
+    
+    <!-- JQuery-UI auto dialog style -->
+    <script>
+      $( function() {
+        $( "#login-dialog" ).dialog({
+          autoOpen: false,
+          draggable: false
+        });
+      });
+    </script>
     
   </body>
 </html>
