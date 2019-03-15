@@ -13,21 +13,26 @@ body {
 }
 
 #item-list {
-  padding: 2em;
+  padding: 2em 2em 2em 2em;
   background-color: #1F7A8C;
-  width: 75vw;
-  height: 100vh;
+  width: 80vw;
+  height: 90vh;
   display: flex;
   flex-flow: column;
   align-items: center;
+  overflow: scroll;
+}
+
+#item-list::-webkit-scrollbar
+{
+	display: none;
 }
 
 #add-item-menu {
-
   padding: 1em;
   background-color: #4792A0;
   
-  width: 25vw;
+  width: 20vw;
   height: 100vh;
   overflow: auto;
   
