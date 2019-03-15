@@ -3,7 +3,6 @@
   <head>
     <title>FoodKeep</title>
     <meta charset="utf-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <!-- AuthUI API -->
     <script src="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.js"></script>
@@ -16,12 +15,12 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     
     <!-- JQueryUI API and stylesheet -->
-    <link rel="stylesheet" href="./jquery-ui/jquery-ui.css">
-    <script src="./jquery-ui/jquery-ui.js"></script>
+    <link rel="stylesheet" href="./js/jquery-ui/jquery-ui.css">
+    <script src="./js/jquery-ui/jquery-ui.js"></script>
     
     <!-- Local stylesheets -->
-    <link rel="stylesheet" href = "./simple_header.css">
-    <link rel="stylesheet" href = "./homestyle.css">
+    <link rel="stylesheet" href = "./css/simple_header.css">
+    <link rel="stylesheet" href = "./css/homestyle.css">
   </head>
   <body>
     <div id="content">
@@ -43,7 +42,7 @@
           <div id="mainBackground"></div>
           <div id="camBox">
             <div id = "camCircle">
-              <img src="./Images/camPic3.png" alt="Camera" class="choosePics"/>
+              <img src="./assets/images/camPic3.png" alt="Camera" class="choosePics"/>
             </div>
             <div id = "camText">
               Scan a recent grocery receipt.
@@ -52,7 +51,7 @@
             <div id="boxGap"></div>
             <div id="pencilBox">
               <div id ="pencilCircle">
-                <img src ="./Images/pencilPic2.png" alt="Pencil" class="choosePics" id="pencilPic">
+                <img src ="./assets/images/pencilPic2.png" alt="Pencil" class="choosePics" id="pencilPic">
               </div>
               <div id="pencilText">
                 Add grocery Items
@@ -61,8 +60,8 @@
           </div>
     
     <!-- Firebase linking and auth scripts -->
-    <script src="./database/setup_firebase.js"></script>
-    <script src="./database/on_login_events.js"></script>
+    <script src="./js/database/setup_firebase.js"></script>
+    <script src="./js/database/on_login_events.js"></script>
     
     <!-- JQuery-UI auto dialog style -->
     <script>

@@ -55,7 +55,7 @@ body{
 #mainBackground {
  width: 100%;
   text-align: center;
-  background-image: url(./Images/strawBerryBackground.png);
+  background-image: url(../assets/images/strawBerryBackground.png);
   background-repeat: no-repeat;
   background-size: 100% 100%;
   height: calc(100vh - 100px);
