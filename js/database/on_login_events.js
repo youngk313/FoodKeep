@@ -22,7 +22,8 @@ function updateMe(user) {
   var uiConfig = { callbacks: 
                   { signInSuccessWithAuthResult: 
                    function(authResult, redirectUrl) {
-                     $( "#login-dialog" ).dialog("close");
+                     $("#lean_overlay").fadeOut(200);
+                     $("#login-dialog").css('display', 'none');
                      return true;
                    }
                   },
@@ -30,8 +31,8 @@ function updateMe(user) {
   signInFlow: 'popup',
   signInSuccessUrl: '#',
   signInOptions: [
-  firebase.auth.EmailAuthProvider.PROVIDER_ID,
-  firebase.auth.GoogleAuthProvider.PROVIDER_ID] };
+  //firebase.auth.GoogleAuthProvider.PROVIDER_ID,
+  firebase.auth.EmailAuthProvider.PROVIDER_ID] };
 
   // The start method will wait until the DOM is loaded.
   ui.start('#firebaseui-auth-container', uiConfig);
@@ -63,9 +64,6 @@ function updateMe(user) {
 
 //Event handlers for Log In and Log Out buttons
 (function() {
-    $('#login-anchor').click(function() {
-      $( "#login-dialog" ).dialog("open");
-    });
     $('#logout-anchor').click(function() {
       firebase.auth().signOut();
     });

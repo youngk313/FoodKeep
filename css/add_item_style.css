@@ -5,6 +5,7 @@ body {
   padding: 0;
   font-family: 'Roboto', sans-serif;
   overflow: hidden;
+  background-color: #89b9c2;
 }
 
 #content {
@@ -13,8 +14,8 @@ body {
 }
 
 #item-list {
-  padding: 2em 2em 2em 2em;
-  background-color: #1F7A8C;
+  padding: 2em;
+  background-color: #89b9c2;
   width: 80vw;
   height: 90vh;
   display: flex;
@@ -28,9 +29,21 @@ body {
 	display: none;
 }
 
+/* Testing out sliding div start */
+#item-description {
+  padding: 2em;
+  width: 15vw;
+  height: 100vh;
+  overflow: hidden;
+  background-color: #4792A0;
+  align-self: flex-start;
+  margin: -2em 0 -2em -2em; 
+}
+/* Testing out sliding div end */
+
 #add-item-menu {
   padding: 1em;
-  background-color: #4792A0;
+  background-color: #1F7A8C;
   
   width: 20vw;
   height: 100vh;

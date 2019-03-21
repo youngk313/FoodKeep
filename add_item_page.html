@@ -15,7 +15,10 @@
     <!-- JQueryUI API and stylesheet -->
     <link rel="stylesheet" href="./js/jquery-ui/jquery-ui.css">
     <script src="./js/jquery-ui/jquery-ui.js"></script>
-		
+    
+    <!-- Simple modal pop-up handler -->
+	<script src="./js/modal/jquery.leanModal.min.js"></script>
+    
     <!-- Add date and date object js -->
     <script src="wip/jsonitem.js"></script>
 		
@@ -31,13 +34,18 @@
         <div id="nav-stats"><a href="#" class="anchor">Stats</a></div>
         <div id="nav-list" style="border-top: 3px solid #193E4B;border-bottom: 3px solid white;"><a href="./add_item_page.html" class="anchor">My List</a></div>
       </div>
-      <div id="login"><a href="#" id="login-anchor" class="anchor">Login</a><a href="#" id="logout-anchor" class="anchor">Sign Out</a><a href="#" class="anchor">Settings</a></div>
+      <div id="login">
+        <a id="login-anchor" rel="leanModal" name="login-dialog" href="#login-dialog" class="anchor">Login</a>
+        <a href="#" id="logout-anchor" class="anchor">Sign Out</a>
+        <a href="#" class="anchor">Settings</a>
+      </div>
     </div>
-    <div id="login-dialog" title="Log In">
-      <div id="firebaseui-auth-container"></div>
-      <!--<div id="loader">Loading...</div>-->
-    </div>
+
     <div id="content">
+      <div id="login-dialog">
+        <div id="firebaseui-auth-container"></div>
+        <!--<div id="loader">Loading...</div>-->
+      </div>
       <div id="add-item-menu">
         
         <!-- Collapsable Menu -->
@@ -58,6 +66,7 @@
         <button id="eggplant" class="veggies-item choice">Eggplant</button>
         <button id="broccoli" class="veggies-item choice">Broccoli</button>
       </div>
+      
       <div id="item-list">
         <a href="#" id="update-div" class="anchor">Update! <span style="color:white; font-size: .75em;">(will update the list from database if logged in)</span></a>
         <!-- New list item entry template -->
@@ -72,25 +81,34 @@
           <!-- New list items go here! -->
         </div>
       </div>
+
     </div>
     
     <!------------- SCRIPTS ------------->
+    
     
     
     <!-- Firebase linking and auth scripts -->
     <script src="./js/database/setup_firebase.js"></script>
     <script src="./js/database/on_login_events.js"></script>
     
-    <!-- JQuery-UI auto dialog style -->
     <script>
-      $( function() {
-        $( "#login-dialog" ).dialog({
-          autoOpen: false,
-          draggable: false
-        });
+      $(document).ready(function(){
+        $("#open-test").click(function() {
+          console.log($("#item-description").css("display"));
+          if ($("#item-description").css("display") == "none") {
+            $("#item-description").show("drop");
+          } else {
+            $("#item-description").hide("drop");
+          }
+        })
       });
     </script>
     
+    <!-- LeanModal login dialog pop-up -->
+    <script>$("#login-anchor").leanModal();</script>
+        
+
     <!-- JQuery-UI auto button style -->
     <script>$('.choice, .spoiler, .remove-button, .generic-button').button();</script>
     
@@ -133,9 +151,7 @@
             snapshot.forEach(function(childSnapshot) {
               let jsonItem = childSnapshot.val();
               let retreivedName = jsonItem['itemName'];
-              console.log(retreivedName);
               let retreivedDate = jsonItem['actualExpiry'];
-              console.log(retreivedDate);
               let itemId = childSnapshot.key;
               addItemElement(itemId, retreivedName, retreivedDate);
             });
@@ -208,5 +224,6 @@
         updateExpiry(newId, pulledName, addNewItem);
       });
     </script>
+    
   </body>
 </html>
