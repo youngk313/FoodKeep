@@ -50,14 +50,20 @@ function updateMe(user) {
       $('#login-anchor').hide();
       $('#logout-anchor').show();
       $('#item-container').empty();
-      promise.then(function() { 
+      let firstName = user.displayName.split(' ')[0];
+      $('#user-greeting').empty();
+      $('#user-greeting').html('Hi ' + firstName + '!');
+      $('#user-greeting').show();
+      promise.then(function() {
         updateMe(user);
       });
     } else {
       //Log Out...
       $('#logout-anchor').hide();
+      $('#user-greeting').hide();
       $('#login-anchor').show();
       $('#item-container').empty();
+      $('#user-greeting').empty();
     }
   });
 })();
