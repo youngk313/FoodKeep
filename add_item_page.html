@@ -22,6 +22,9 @@
     <!-- Local stylesheets -->
     <link rel="stylesheet" href="./css/add_item_style.css">
     <link rel="stylesheet" href = "./css/simple_header.css">
+    <style>
+     
+    </style>
   </head>
   <body>
     <div id="header">
@@ -137,9 +140,11 @@
               console.log(retreivedName);
               let retreivedDate = jsonItem['actualExpiry'];
               console.log(retreivedDate);
-              dateCompare(retreivedDate);
+              console.log("id:" + childSnapshot.key);
+              dateCompare(retreivedDate, childSnapshot.key);
               let itemId = childSnapshot.key;
               addItemElement(itemId, retreivedName, retreivedDate);
+              console.log(" ");
             });
           });
         }
@@ -210,14 +215,22 @@
         updateExpiry(newId, pulledName, addNewItem);
       });
     </script>
+
     <script>
-       function dateCompare(itemExpiryDate) {
+        //Calculates if food is expired
+       function dateCompare(itemExpiryDate, itemId) {
         var date1 = new Date();
         date1.setHours(0,0,0,0);
         var date2 = new Date(itemExpiryDate);
-
+         
+         var item = "#" + itemId;
+         console.log(item);
         if (date1 >= date2) {
           console.log("food expired");
+          $(document).ready(function(){
+            $(item + " .list-item-entry").attr('style', 'background-color: #f44242 !important');
+          });
+
         } else {
           console.log("food is good to eat.")
         }
