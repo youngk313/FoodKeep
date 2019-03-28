@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>FoodKeep</title>
+    <meta charset="utf-8"/>
+    
+    <!-- AuthUI API -->
+    <script src="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.js"></script>
+    <link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.css" />
+    
+    <!-- Firebase API -->
+    <script src="https://www.gstatic.com/firebasejs/5.5.8/firebase.js"></script>
+    
+    <!-- JQuery API -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    
+    <!-- JQueryUI API and stylesheet -->
+    <link rel="stylesheet" href="./js/jquery-ui/jquery-ui.css">
+    <script src="./js/jquery-ui/jquery-ui.js"></script>
+    
+    <!-- Simple modal pop-up handler -->
+	<script src="./js/modal/jquery.leanModal.min.js"></script>
+    
+    <!-- Charts.js API -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+    <script src="./js/graphs/util.js"></script>
+    
+    <!-- Local stylesheets -->
+    <link rel="stylesheet" href = "./css/simple_header.css">
+    <link rel="stylesheet" href = "./css/stats_style.css">
+    
+  </head>
+  <body>
+    <div id="header">
+      <div id="title">Food Keep</div>
+      <div id="nav">
+        <div id="nav-home"><a href="./home_page.html" class="anchor">Home</a></div>
+        <div id="nav-stats" style="border-top: 3px solid #193E4B;border-bottom: 3px solid white;"><a href="#" class="anchor">Stats</a></div>
+        <div id="nav-list"><a href="./add_item_page.html" class="anchor">My List</a></div>
+      </div>
+      <div id="login">
+        <a id="login-anchor" rel="leanModal" name="login-dialog" href="#login-dialog" class="anchor">Login</a>
+        <a href="#" id="logout-anchor" class="anchor">Sign Out</a>
+        <a href="#" class="anchor">Settings</a>
+        <div id="user-greeting" style="color: white; font-weight: bold;"></div>
+      </div>
+    </div>
+    <div id="login-dialog" title="Log In">
+      <div id="firebaseui-auth-container"></div>
+      <!--<div id="loader">Loading...</div>-->
+    </div>
+    <div id="content">
+      <div id="graph-container">
+        <div id="graph">
+          <canvas id="chart-0"></canvas></div>
+        <div id="toolbar">
+		  <button onclick="randomize(this)">Randomize</button>
+		  <button onclick="addDataset(this)">Add Dataset</button>
+		  <button onclick="removeDataset(this)">Remove Dataset</button>
+        </div>
+      </div>
+    </div>
+    <!-- Firebase linking and auth scripts -->
+    <script src="./js/database/setup_firebase.js"></script>
+    <script src="./js/database/on_login_events.js"></script>
+    
+    <!-- LeanModal login dialog pop-up -->
+    <script>$("#login-anchor").leanModal();</script>
+    
+	<script>
+		var DATA_COUNT = 12;
+
+		var utils = Samples.utils;
+
+		utils.srand(110);
+
+		function alternatePointStyles(ctx) {
+			var index = ctx.dataIndex;
+			return index % 2 === 0 ? 'circle' : 'rect';
+		}
+
+		function makeHalfAsOpaque(ctx) {
+			var c = ctx.dataset.backgroundColor;
+			return utils.transparentize(c);
+		}
+
+		function adjustRadiusBasedOnData(ctx) {
+			var v = ctx.dataset.data[ctx.dataIndex];
+			return v < 10 ? 5
+				: v < 25 ? 7
+				: v < 50 ? 9
+				: v < 75 ? 11
+				: 15;
+		}
+
+		function generateData() {
+			return utils.numbers({
+				count: DATA_COUNT,
+				min: 0,
+				max: 100
+			});
+		}
+
+		var data = {
+			labels: utils.months({count: DATA_COUNT}),
+			datasets: [{
+				data: generateData(),
+				backgroundColor: '#4dc9f6',
+				borderColor: '#4dc9f6',
+			}]
+		};
+
+		var options = {
+			legend: false,
+			tooltips: true,
+			elements: {
+				line: {
+					fill: false,
+				},
+				point: {
+					hoverBackgroundColor: makeHalfAsOpaque,
+					radius: adjustRadiusBasedOnData,
+					pointStyle: alternatePointStyles,
+					hoverRadius: 15,
+				}
+			}
+		};
+
+		var chart = new Chart('chart-0', {
+			type: 'line',
+			data: data,
+			options: options
+		});
+
+
+		// eslint-disable-next-line no-unused-vars
+		function addDataset() {
+			var newColor = utils.color(chart.data.datasets.length);
+
+			chart.data.datasets.push({
+				data: generateData(),
+				backgroundColor: newColor,
+				borderColor: newColor
+			});
+			chart.update();
+		}
+
+		// eslint-disable-next-line no-unused-vars
+		function randomize() {
+			chart.data.datasets.forEach(function(dataset) {
+				dataset.data = generateData();
+			});
+			chart.update();
+		}
+
+		// eslint-disable-next-line no-unused-vars
+		function removeDataset() {
+			chart.data.datasets.shift();
+			chart.update();
+		}
+	</script>
+  </body>
+</html>
