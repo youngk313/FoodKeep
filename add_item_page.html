@@ -158,9 +158,12 @@
               let jsonItem = childSnapshot.val();
               let retreivedName = jsonItem['itemName'];
               let retreivedDate = jsonItem['actualExpiry'];
+              var retreivedExpire = jsonItem['isExpired'];
+              console.log(retreivedName + " " + retreivedExpire);
               console.log(retreivedDate);
               let itemId = childSnapshot.key;
-              dateCompare(retreivedDate, itemId);
+              dateCompare(retreivedDate, itemId, user.uid, retreivedName, retreivedExpire);
+              //(itemExpiryDate, itemId, user, itemName, retIsExpired)
               addItemElement(itemId, retreivedName, retreivedDate);
             });
           });
@@ -232,24 +235,56 @@
       });
     </script>
     
-    <!-- Function that calculates if food is expired -->
+    <!-- Function that calculates if food is expired... Now adds expiring of fb for inbetween step-->
     <script>
-       function dateCompare(itemExpiryDate, itemId) {
+       function dateCompare(itemExpiryDate, itemId, user, itemName, retIsExpired) {
+         var name = itemName;
+         console.log("test : " + retIsExpired);
         let date1 = new Date();
         date1.setHours(0,0,0,0);
         let date2 = new Date(itemExpiryDate);
         let item = "#" + itemId;
         console.log(item);
-        if (date1 >= date2) {
-          console.log("food expired");
-          $(document).ready(function(){
+         let datePast = date1 >= date2;
+          
+         if (datePast) {
+            $(document).ready(function(){
             $(item + " .list-item-entry").attr('style', 'background-color: #f44242 !important');
           });
 
         } else {
           console.log("food is good to eat.")
         }
+         
+         console.log("passed " + datePast);
+        if (datePast == true && retIsExpired != "expired") { 
+          
+          firebase.database().ref("users/" + user + "/list/" + itemId).update(
+            {
+              "isExpired" : "expiring"
+            });
+          console.log(retIsExpired);
+          
+          if (retIsExpired == "expiring") {
+            
+            
+            firebase.database().ref("users/" + user + "/list/" + itemId).update(
+              
+            {
+              "isExpired" : "expired"
+            });
+            firebase.database().ref("users/" + user + "/expiredList/" + itemName).update(
+            {
+              "timesExpired" : "hey"
+            });
+            
+          }
+          
+         
       };
+    }
     </script>
+    
+    
   </body>
 </html>
