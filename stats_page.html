@@ -53,11 +53,6 @@
       <div id="graph-container">
         <div id="graph">
           <canvas id="chart-0"></canvas></div>
-        <div id="toolbar">
-		  <button onclick="randomize(this)">Randomize</button>
-		  <button onclick="addDataset(this)">Add Dataset</button>
-		  <button onclick="removeDataset(this)">Remove Dataset</button>
-        </div>
       </div>
     </div>
     <!-- Firebase linking and auth scripts -->
@@ -68,96 +63,120 @@
     <script>$("#login-anchor").leanModal();</script>
     
 	<script>
-		var DATA_COUNT = 12;
-
-		var utils = Samples.utils;
-
-		utils.srand(110);
-
-		function alternatePointStyles(ctx) {
-			var index = ctx.dataIndex;
-			return index % 2 === 0 ? 'circle' : 'rect';
-		}
-
-		function makeHalfAsOpaque(ctx) {
-			var c = ctx.dataset.backgroundColor;
-			return utils.transparentize(c);
-		}
-
-		function adjustRadiusBasedOnData(ctx) {
-			var v = ctx.dataset.data[ctx.dataIndex];
-			return v < 10 ? 5
-				: v < 25 ? 7
-				: v < 50 ? 9
-				: v < 75 ? 11
-				: 15;
-		}
-
-		function generateData() {
-			return utils.numbers({
-				count: DATA_COUNT,
-				min: 0,
-				max: 100
-			});
-		}
-
-		var data = {
-			labels: utils.months({count: DATA_COUNT}),
-			datasets: [{
-				data: generateData(),
-				backgroundColor: '#4dc9f6',
-				borderColor: '#4dc9f6',
-			}]
-		};
-
-		var options = {
-			legend: false,
-			tooltips: true,
-			elements: {
-				line: {
-					fill: false,
-				},
-				point: {
-					hoverBackgroundColor: makeHalfAsOpaque,
-					radius: adjustRadiusBasedOnData,
-					pointStyle: alternatePointStyles,
-					hoverRadius: 15,
-				}
+		var count = [];
+		var countNames= [];
+		function updateMe(user) {
+      if (user) {
+        let listRef = firebase.database().ref("users/" + user.uid + '/expiredList');
+        listRef.once('value').then(function(snapshot) {
+          snapshot.forEach(function(childSnapshot) {
+            let jsonItem = childSnapshot.val();
+            let xexpired = jsonItem['timesExpired'];
+						let xname = jsonItem['name'];
+						console.log(xexpired);
+						count.push(xexpired)
+						countNames.push(xname);
+						console.log(count + countNames);
+						if (count.length >= 5) {
+							/*var sortedxList= [];
+							for (var i = 0; i < count.length; i ++) {
+								sortedxList.push({'name' : countNames[0], 'counted' : count });
+							}
+							sortedxList.sort(function(a, b) {
+								return ((a.counted < b.name) ? - 1 : ((a.counted == b.counted) ? 0 : 1));
+							});
+							console.log("test sort" + sortedxList);
+							*/
+							count.sort();
+							var valOne = count[0];
+							var valTwo = count[1];
+							var valThree = count[2];
+							var valFour = count[3];
+							var valFive = count[4];
+							
+							var ctx = document.getElementById('chart-0').getContext('2d');
+							var myChart = new Chart(ctx, {
+							type: 'bar',
+							data: {
+								labels: ['Item 1', 'Item 2', 'Item 3', 'Item 4', 'Item 5'],
+								datasets: [{
+									label: 'Your 5 most expired Items so far: ',
+										data: [valOne, valTwo, valThree, valFour, valFive],
+											backgroundColor: [
+												'rgba(255, 99, 132, 0.2)',
+												'rgba(54, 162, 235, 0.2)',
+												'rgba(255, 206, 86, 0.2)',
+												'rgba(75, 192, 192, 0.2)',
+												'rgba(153, 102, 255, 0.2)'
+											],
+											borderColor: [
+												'rgba(255, 99, 132, 1)',
+												'rgba(54, 162, 235, 1)',
+												'rgba(255, 206, 86, 1)',
+												'rgba(75, 192, 192, 1)',
+												'rgba(153, 102, 255, 1)'
+											],
+											borderWidth: 1
+									}]
+							},
+							options: {
+									scales: {
+											yAxes: [{
+													ticks: {
+															beginAtZero: true
+													}
+											}]
+										}
+									}
+							}); 
+						} else{
+							console.log("Not enough Data");
+							}
+					});
+				});
 			}
-		};
+    }    
+		console.log(count);
+		if (count.length >= 5) {
+			var ctx = document.getElementById('chart-0').getContext('2d');
+			var myChart = new Chart(ctx, {
 
-		var chart = new Chart('chart-0', {
-			type: 'line',
-			data: data,
-			options: options
-		});
-
-
-		// eslint-disable-next-line no-unused-vars
-		function addDataset() {
-			var newColor = utils.color(chart.data.datasets.length);
-
-			chart.data.datasets.push({
-				data: generateData(),
-				backgroundColor: newColor,
-				borderColor: newColor
-			});
-			chart.update();
-		}
-
-		// eslint-disable-next-line no-unused-vars
-		function randomize() {
-			chart.data.datasets.forEach(function(dataset) {
-				dataset.data = generateData();
-			});
-			chart.update();
-		}
-
-		// eslint-disable-next-line no-unused-vars
-		function removeDataset() {
-			chart.data.datasets.shift();
-			chart.update();
-		}
-	</script>
+					type: 'bar',
+					data: {
+							labels: ['Item 1', 'Item 2', 'Item 3', 'Item 4', 'Item 5'],
+							datasets: [{
+									label: 'Your 5 most expired Items so far: ',
+									data: [12, 19, 3, 5, 2],
+									backgroundColor: [
+											'rgba(255, 99, 132, 0.2)',
+											'rgba(54, 162, 235, 0.2)',
+											'rgba(255, 206, 86, 0.2)',
+											'rgba(75, 192, 192, 0.2)',
+											'rgba(153, 102, 255, 0.2)'
+									],
+									borderColor: [
+											'rgba(255, 99, 132, 1)',
+											'rgba(54, 162, 235, 1)',
+											'rgba(255, 206, 86, 1)',
+											'rgba(75, 192, 192, 1)',
+											'rgba(153, 102, 255, 1)'
+									],
+									borderWidth: 1
+							}]
+					},
+					options: {
+							scales: {
+									yAxes: [{
+											ticks: {
+													beginAtZero: true
+											}
+									}]
+							}
+					}
+			}); 
+	} else{
+		console.log("Not enough Data");
+	}
+</script>
   </body>
 </html>
