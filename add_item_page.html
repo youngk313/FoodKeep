@@ -237,6 +237,7 @@
     
     <!-- Function that calculates if food is expired... Now adds expiring of fb for inbetween step-->
     <script>
+       var checker;
        function dateCompare(itemExpiryDate, itemId, user, itemName, retIsExpired) {
          var name = itemName;
          console.log("test : " + retIsExpired);
@@ -257,33 +258,60 @@
         }
          
          console.log("passed " + datePast);
-        if (datePast == true && retIsExpired != "expired") { 
+        if (datePast == true && retIsExpired != "expired") {
+          
           
           firebase.database().ref("users/" + user + "/list/" + itemId).update(
             {
               "isExpired" : "expiring"
             });
-          console.log(retIsExpired);
-          
+         
+           console.log(retIsExpired == "expiring");
           if (retIsExpired == "expiring") {
-            
-            
             firebase.database().ref("users/" + user + "/list/" + itemId).update(
-              
             {
               "isExpired" : "expired"
             });
-            firebase.database().ref("users/" + user + "/expiredList/" + itemName).update(
-            {
-              "timesExpired" : "hey"
-            });
+            
+            var expireNum;
+            var listRef = firebase.database().ref("users/" + user + '/expiredList/' + itemName );
+            
+                getPrevExpired(user, itemName);
+                console.log("expireNum: " + expireNum);
+                
+               firebase.database().ref("users/" + user + "/expiredList/" + itemName).update(
+                {
+                  "timesExpired" : 9
+                });           
             
           }
-          
          
       };
     }
-    </script>
+    var jsonItem;
+    var timesExpired;
+    var listRef;
+      //let things = null;
+      function getPrevExpired(userId, itemName) {
+          listRef = firebase.database().ref("users/" + userId + '/expiredList');
+          listRef.once('value').then(function(snapshot) {
+            snapshot.forEach(function(childSnapshot) {
+              jsonItem = childSnapshot.val();
+              timesExpired = jsonItem["timesExpired"];
+              checker = timesExpired;
+            //  things += checker;
+              console.log("checker 1 " + checker);
+            });
+          });
+        console.log("checker 2 " + checker);
+        console.log(jsonItem);
+        console.log(timesExpired);
+        
+      }
+      
+    
+    </script> 
+
     
     
   </body>
