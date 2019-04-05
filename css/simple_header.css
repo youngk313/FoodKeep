@@ -6,12 +6,13 @@ body {
 
 #header {
   display: flex;
-  height: 50px;
+  height: 75px;
   text-align: center;
-  background: #193E4B;
-  color: #E1E5F2;
+  background: #97D6D0;
+  color: white;
+  font-size: 1.5em;
 }
-
+/* vidhi color #97D6D0 */
 #header #title, #nav, #login {
   padding: 1em;
   display: flex;
@@ -21,7 +22,7 @@ body {
 #nav > div {
   display: flex;
   align-items: center;
-  height: 50px;
+  height: 75px;
   box-sizing: border-box;
   margin: 0 1em 0 1em;
 }
@@ -33,6 +34,7 @@ body {
   width: 20vw;
   font-size: 1.5em;
   justify-content: center;
+  font-weight: bold;
 }
 
 #login {
@@ -41,12 +43,12 @@ body {
 }
 
 .anchor {
-  color: #CDD1DC;
+  color: white;
   text-decoration: none; 
 }
 
 .anchor:hover {
-  color: white;
+  color: #CDD1DC;
 }
 
 #login > .anchor, #user-greeting {

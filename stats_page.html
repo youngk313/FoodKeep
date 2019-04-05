@@ -27,24 +27,37 @@
     
     <!-- Local stylesheets -->
     <link rel="stylesheet" href = "./css/simple_header.css">
-    <link rel="stylesheet" href = "./css/stats_style.css">
+		<link rel="stylesheet" href = "./css/stats_style.css">
+		
+		
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+		<link rel="stylesheet" href = "./css/headstyle.css">
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
     
   </head>
-  <body>
-    <div id="header">
-      <div id="title">Food Keep</div>
-      <div id="nav">
-        <div id="nav-home"><a href="./home_page.html" class="anchor">Home</a></div>
-        <div id="nav-stats" style="border-top: 3px solid #193E4B;border-bottom: 3px solid white;"><a href="#" class="anchor">Stats</a></div>
-        <div id="nav-list"><a href="./add_item_page.html" class="anchor">My List</a></div>
-      </div>
-      <div id="login">
-        <a id="login-anchor" rel="leanModal" name="login-dialog" href="#login-dialog" class="anchor">Login</a>
-        <a href="#" id="logout-anchor" class="anchor">Sign Out</a>
-        <a href="#" class="anchor">Settings</a>
-        <div id="user-greeting" style="color: white; font-weight: bold;"></div>
-      </div>
-    </div>
+  <body id = "homePage" data-spy="scroll" data-target=".navbar" data-offset="50">
+			<nav style = "background-color: #97D6D0" class = "navbar navbar-default navbar-fixed-top text-center">
+					<div style = "display:inline-block;" class = "container-fluid">
+						<div class = "navbar-header">
+							<a class = "navbar-brand" href = "#"><h1 id="title" style ="color:white">FOODKEEP</h1></a>
+						</div>
+							<ul class = "nav navbar-nav text-center" style="padding: 0px;">
+								<li>
+									<a id = "mylist" href="./add_item_page.html"><h4>My List</h4></a>
+								</li>
+								<li class = "active"><a href="#Mystats"> <h4 style="border-bottom: 4px solid white; padding-bottom: 5px;"> My Stats </h4></a></li>
+								<li><a style="background-color: #97D6D0;" href = "#Contact"><h4>Contact</h4></a></li>
+								<li><a href ="#"><h4>Log In</h4></a></li>
+								<li>
+									<div id = "gearHold" class = "container">
+										<div id = "iconHolder" class = "container">
+											<h4 style = "vertical-align: middle">Settings</h4>
+										</div>
+									</div>
+								</li>
+							</ul>
+					</div>
+				</nav>
     <div id="login-dialog" title="Log In">
       <div id="firebaseui-auth-container"></div>
       <!--<div id="loader">Loading...</div>-->
@@ -52,7 +65,8 @@
     <div id="content">
       <div id="graph-container">
         <div id="graph">
-          <canvas id="chart-0"></canvas></div>
+					<canvas id="chart-0"></canvas>
+				</div>
       </div>
     </div>
     <!-- Firebase linking and auth scripts -->
@@ -63,90 +77,35 @@
     <script>$("#login-anchor").leanModal();</script>
     
 	<script>
-		var count = [];
-		var countNames= [];
+		var keysSorted;
 		function updateMe(user) {
       if (user) {
-        let listRef = firebase.database().ref("users/" + user.uid + '/expiredList');
-        listRef.once('value').then(function(snapshot) {
-          snapshot.forEach(function(childSnapshot) {
-            let jsonItem = childSnapshot.val();
-            let xexpired = jsonItem['timesExpired'];
-						let xname = jsonItem['name'];
-						console.log(xexpired);
-						count.push(xexpired)
-						countNames.push(xname);
-						console.log(count + countNames);
-						if (count.length >= 5) {
-							/*var sortedxList= [];
-							for (var i = 0; i < count.length; i ++) {
-								sortedxList.push({'name' : countNames[0], 'counted' : count });
-							}
-							sortedxList.sort(function(a, b) {
-								return ((a.counted < b.name) ? - 1 : ((a.counted == b.counted) ? 0 : 1));
-							});
-							console.log("test sort" + sortedxList);
-							*/
-							count.sort();
-							var valOne = count[0];
-							var valTwo = count[1];
-							var valThree = count[2];
-							var valFour = count[3];
-							var valFive = count[4];
-							
-							var ctx = document.getElementById('chart-0').getContext('2d');
-							var myChart = new Chart(ctx, {
-							type: 'bar',
-							data: {
-								labels: ['Item 1', 'Item 2', 'Item 3', 'Item 4', 'Item 5'],
-								datasets: [{
-									label: 'Your 5 most expired Items so far: ',
-										data: [valOne, valTwo, valThree, valFour, valFive],
-											backgroundColor: [
-												'rgba(255, 99, 132, 0.2)',
-												'rgba(54, 162, 235, 0.2)',
-												'rgba(255, 206, 86, 0.2)',
-												'rgba(75, 192, 192, 0.2)',
-												'rgba(153, 102, 255, 0.2)'
-											],
-											borderColor: [
-												'rgba(255, 99, 132, 1)',
-												'rgba(54, 162, 235, 1)',
-												'rgba(255, 206, 86, 1)',
-												'rgba(75, 192, 192, 1)',
-												'rgba(153, 102, 255, 1)'
-											],
-											borderWidth: 1
-									}]
-							},
-							options: {
-									scales: {
-											yAxes: [{
-													ticks: {
-															beginAtZero: true
-													}
-											}]
-										}
-									}
-							}); 
-						} else{
-							console.log("Not enough Data");
-							}
-					});
-				});
-			}
-    }    
-		console.log(count);
-		if (count.length >= 5) {
+				let listRef = firebase.database().ref("users/" + user.uid + '/expiredList');
+				listRef.once('value').then(function(snapshot) {
+					console.log(snapshot.val());
+					var list = snapshot.val();
+					keysSorted = Object.keys(list).sort(function(a,b){return list[b]-list[a]});
+					console.log(keysSorted);
+					console.log(list[keysSorted[4]]);
+					console.log(keysSorted.length);
+					console.log(list.length);
+
+					var item1 = list[keysSorted[0]];
+					var item2 = list[keysSorted[1]];
+					var item3 = list[keysSorted[2]];
+					var item4 = list[keysSorted[3]];
+					var item5 = list[keysSorted[4]];
+				
+		if (keysSorted.length >= 5) {
 			var ctx = document.getElementById('chart-0').getContext('2d');
 			var myChart = new Chart(ctx, {
 
 					type: 'bar',
 					data: {
-							labels: ['Item 1', 'Item 2', 'Item 3', 'Item 4', 'Item 5'],
+							labels: [keysSorted[0], keysSorted[1], keysSorted[2], keysSorted[3], keysSorted[4]],
 							datasets: [{
 									label: 'Your 5 most expired Items so far: ',
-									data: [12, 19, 3, 5, 2],
+									data: [item1, item2, item3, item4, item5],
 									backgroundColor: [
 											'rgba(255, 99, 132, 0.2)',
 											'rgba(54, 162, 235, 0.2)',
@@ -161,7 +120,7 @@
 											'rgba(75, 192, 192, 1)',
 											'rgba(153, 102, 255, 1)'
 									],
-									borderWidth: 1
+									borderWidth: 3
 							}]
 					},
 					options: {
@@ -173,10 +132,17 @@
 									}]
 							}
 					}
-			}); 
+			});
+			myChart.canvas.parentNode.style.height = '300px';
+			myChart.canvas.parentNode.style.width = '600px';
+			myChart.canvas.parentNode.style.boxShadow = '0px 0px 10px rgba(0, 0, 0, .5)';
 	} else{
 		console.log("Not enough Data");
 	}
+
+});
+				}
+		}  
 </script>
   </body>
 </html>
