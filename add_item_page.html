@@ -26,9 +26,7 @@
     <!-- Local stylesheets -->
     <link rel="stylesheet" href="./css/add_item_style.css">
     <link rel="stylesheet" href = "./css/simple_header.css">
-    <style>
-     
-    </style>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
   </head>
   <body>
     <div id="header">
@@ -74,14 +72,13 @@
       </div>
       
       <div id="item-list">
-        <a href="#" id="update-div" class="anchor">Update! <span style="color:white; font-size: .75em;">(will update the list from database if logged in)</span></a>
         <!-- New list item entry template -->
         <div class="list-item" id="template">
           <div class="list-item-entry">
             <div class="list-item-name"></div>
             <div class="list-item-date"></div>
           </div>
-          <button class="remove-button">Remove</button>
+          <div class="list-remove-button"><button class="remove-button"><i class="far fa-trash-alt"></i></button></div>
         </div>
         <div id="item-container">
           <!-- New list items go here! -->
@@ -174,7 +171,7 @@
     <!-- Function that appends a new list item based on the #template (must generate unique id before using) -->
     <script>
       function addItemElement(uniqueId, itemName, expiryDate) {
-        $("#template").clone().css("display", "block").attr('id', uniqueId).appendTo("#item-container");
+        $("#template").clone().css("display", "flex").attr('id', uniqueId).appendTo("#item-container");
         $("#" + uniqueId + " .list-item-name").append(itemName);
 		$("#" + uniqueId + " .list-item-date").append(expiryDate);
         $("#" + uniqueId + " .remove-button").attr("id", uniqueId);

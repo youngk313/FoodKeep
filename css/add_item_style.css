@@ -25,7 +25,7 @@ body {
 }
 
 .spoiler:hover, .choice:hover {
-  box-shadow: 0 5px 10px 0 rgba(0,0,0,0.15);
+  box-shadow: 0 5px 10px 0 rgba(0,0,0,0.1);
 }
 
 .choice {
@@ -35,7 +35,6 @@ body {
 
 #item-list {
   padding: 2em;
-
   color: white;
   width: 80vw;
   height: 90vh;
@@ -50,6 +49,7 @@ body {
   background-color: black;
   background: url(../assets/images/egg.jpg);
   background-size: 100% auto;
+  background-repeat: no-repeat; 
   opacity: 0.75;
   top: 0;
   left: 0;
@@ -117,55 +117,83 @@ body {
 }
 
 .list-item {
-  padding: .5em;
+  margin: 1.5em;
+  width: 50vw;
+  display: flex;
+  justify-content: space-around;
 }
 
 .list-item-entry {
-  margin: .5em;
-  display: inline-block;
+  /* Layout */
+  display: flex;
+  align-items: center;
   width: 50vw;
-  padding: 5px;
-  border-radius: 10px;
+
+  /* Style */
   background: #FFFBF3;
   color: #26605b;
-  box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.5);
+  border-radius: 10px;
+  box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.25);
 }
 
-.expired-list-item-entry {
-  background-color: #E7636D;
-  color: white;
+.list-remove-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-left: 0.75em;
 }
-
-.expired-list-item-entry .list-item-date {
-  background: #FED5D8;
-}
-
-button:focus {outline:0;}
-
 
 .list-item-entry div {
-  display: inline-block;
+  /* Layout */
+  display: flex;
+  padding: 0.75em;
 }
 
 .list-item-name {
-  width: 75%;
+  /* Layout */
+  width: 80%;
   text-indent: 50px;
 }
 
 .list-item-date {
+  /* Layout */
+  justify-content: center;
   width: 20%;
-  text-align: center;
+
+  /* Style */
   background: #ffeac0;
   color: #26605b;
-  border-radius: 5px;
-  padding: 5px;
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
 }
+
+.expired-list-item-entry {
+  background-color:#FED5D8 ;
+  
+}
+
+.expired-list-item-entry .list-item-date {
+  background: #E7636D;
+  color: white;
+}
+
+button:focus {outline:0;}
 
 .remove-button {
-  display: inline-block;
+  background-color: #60C0b7;
+  padding: .5em;
+  border: none;
+  border-radius: 10px;
+  color: white;
+  font-size: 1.2em;
+  cursor: pointer;
 }
 
-@font-face{
-  font-family: "title";
-  src: url("../assets/fonts/Cocomat Light-trial.ttf");
+.remove-button:hover {
+  box-shadow: 0 5px 10px 0 rgba(0,0,0,0.1);
+}
+
+.choice {
+  background-color: #43aaa0;
+  font-size: 1em;
 }
