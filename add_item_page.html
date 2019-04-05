@@ -269,22 +269,15 @@
             {
               "isExpired" : "expired"
             });
-            
-            var expireNum;
-            var listRef = firebase.database().ref("users/" + user + '/expiredList/' + itemName );
-            
-                getPrevExpired(user, itemName);
-                console.log("expireNum: " + expireNum);
-                
-               firebase.database().ref("users/" + user + "/expiredList/" + itemName).update(
-                {
-                  "timesExpired" : 9
-                });           
+            var databaseRef = firebase.database().ref('users').child(user).child('expiredList').child(name);
+            databaseRef.transaction(function(numExpired) {
+              return (numExpired || 0) + 1;
+            });
             
           }
          
       };
-    }
+    }/*
     var jsonItem;
     var timesExpired;
     var listRef;
@@ -304,7 +297,7 @@
         console.log(jsonItem);
         console.log(timesExpired);
         
-      }
+      }*/
       
     
     </script> 
