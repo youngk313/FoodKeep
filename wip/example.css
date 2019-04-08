@@ -1,0 +1,194 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto');
+
+a#example-button-anchor {
+    display: inline-block;
+    padding: 0.35em 1.2em;
+    border: 0.1em solid #60C0b7;
+    margin: 0 0.3em 0.3em 0;
+    border-radius: 20px;
+    box-sizing: border-box;
+    text-decoration: none;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 300;
+    color: #60C0b7;
+    text-align: center;
+    transition: all 0.2s;
+}
+
+a#example-button-anchor:hover {
+    color: #FFFFFF;
+    background-color: #60C0b7;
+}
+
+@media all and (max-width:30em) {
+    a#example-button-anchor {
+        display: block;
+        margin: 0.4em auto;
+    }
+}
+
+a.remove-button {
+    display: inline-block;
+    padding: .5em;
+    font-size: 1.2em;
+    border: 0.1em solid #60C0b7;
+    border-radius: 12px;
+    box-sizing: border-box;
+    text-decoration: none;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 300;
+    color: #60C0b7;
+    text-align: center;
+    transition: all 0.2s;
+}
+
+a.remove-button:hover {
+    color: #FFFFFF;
+    background-color: #60C0b7;
+}
+
+@media all and (max-width:30em) {
+    a.remove-button {
+        display: block;
+        margin: 0.4em auto;
+    }
+}
+
+#steps {
+    font-family: 'Roboto', sans-serif !important;
+    font-weight: 400 !important;
+    background: url('../assets/images/examplebg1.jpg');
+    background-size: 115% auto;
+    background-position: right top;
+    background-repeat: no-repeat;
+    padding-left: 15%;
+
+}
+
+#steps-heading {
+    font-size: 2.5em;
+    font-weight: 500;
+    letter-spacing: 4pt;
+    text-align: center;
+}
+
+#example {
+    display: flex;
+    justify-content: space-around;
+    flex-direction: column;
+    align-items: center;
+}
+
+#list-example-heading {
+    font-size: 2em;
+    color: rgba(0, 0, 0, 0.6);
+    margin-bottom: 2%;
+}
+
+#list-explain {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 35vw;
+    font-size: 1.6em;
+}
+
+#list-explain-button {
+    color: black;
+}
+
+#list-example {
+    color: white;
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    padding: 2em;
+    /*background: #D9F0ED;
+    border-radius: 12px; */
+}
+
+.list-item {
+    margin: 1.5em;
+    width: 38vw;
+    display: flex;
+    justify-content: space-around;
+}
+
+.list-item-entry {
+    /* Layout */
+    display: flex;
+    align-items: center;
+    width: 35vw;
+    justify-content: space-between;
+
+    /* Style */
+    box-sizing: border-box;
+    background: #FFFBF3;
+    color: #26605b;
+    border-radius: 10px;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.25);
+}
+
+.list-remove-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-left: 0.75em;
+}
+
+.list-item-entry div {
+    /* Layout */
+    display: flex;
+    padding: 0.75em;
+}
+
+.list-item-name {
+    /* Layout */
+    width: 50%;
+    text-indent: 50px;
+}
+
+.list-item-date {
+    /* Layout */
+    justify-content: center;
+    width: 20%;
+
+
+    /* Style */
+    background: #ffeac0;
+    color: #26605b;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+
+.expired-list-item-entry {
+    background-color: #FED5D8;
+
+}
+
+.expired-list-item-entry .list-item-date {
+    background: #E7636D;
+    color: white;
+    border: 1px solid #E7636D;
+}
+
+button:focus {
+    outline: 0;
+}
+/*
+.remove-button {
+    background-color: #60C0b7;
+    padding: .5em;
+    border: none;
+    border-radius: 10px;
+    color: white;
+    font-size: 1.2em;
+    cursor: pointer;
+}
+
+.remove-button:hover {
+    box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.1);
+}
+*/

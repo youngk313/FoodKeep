@@ -13,9 +13,9 @@ body {
   font-size: 1.2em;
 }
 /* vidhi color #97D6D0 */
-#simple-header #logo, #nav, #login {
+#logo, #nav, #login {
   font-family: 'Roboto', sans-serif;
-  padding: 1em;
+  padding: 1em !important;
   display: flex;
   align-items: center;
 }

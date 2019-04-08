@@ -5,7 +5,7 @@ body {
   padding: 0;
   font-family: 'Roboto', sans-serif;
   overflow: hidden;
-  background-color: #89b9c2;
+  background-color: #96c6ea;
 }
 
 #content {
@@ -13,7 +13,8 @@ body {
   justify-content: center;
 }
 
-.spoiler, .choice {
+.spoiler,
+.choice {
   background-color: #60C0b7;
   padding: 5px;
   border: none;
@@ -23,8 +24,9 @@ body {
   cursor: pointer;
 }
 
-.spoiler:hover, .choice:hover {
-  box-shadow: 0 5px 10px 0 rgba(0,0,0,0.1);
+.spoiler:hover,
+.choice:hover {
+  box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.1);
 }
 
 .choice {
@@ -45,11 +47,11 @@ body {
 
 #content::before {
   content: "";
-  background-color: black;
-  background: url(../assets/images/egg.jpg);
+  background-color: #f4faff;
+  /*background: url(../assets/images/egg.jpg);
   background-size: 100% auto;
   background-repeat: no-repeat; 
-  opacity: 0.75;
+  opacity: 0.5;*/
   top: 0;
   left: 0;
   bottom: 0;
@@ -58,9 +60,8 @@ body {
   z-index: -1;
 }
 
-#item-list::-webkit-scrollbar
-{
-	display: none;
+#item-list::-webkit-scrollbar {
+  display: none;
 }
 
 /* Testing out sliding div start */
@@ -71,28 +72,27 @@ body {
   overflow: hidden;
   background-color: #4792A0;
   align-self: flex-start;
-  margin: -2em 0 -2em -2em; 
+  margin: -2em 0 -2em -2em;
 }
+
 /* Testing out sliding div end */
 
 #add-item-menu {
   padding: 1em;
-  background-color:rgba( 255, 251, 243, .8);
-  
+  background-color: rgba(255, 251, 243, .8);
+
   width: 20vw;
   height: 100vh;
   overflow: auto;
-  
+
   /* Bringing it forward to show shadow */
   position: relative;
   z-index: 5;
-  box-shadow: 3px 5px 5px rgba(0, 0, 0, .1);
+  box-shadow: 1px 1px 1px rgba(0, 0, 0, .1);
 }
 
-
-
-#add-item-menu::-webkit-scrollbar { 
-  display: none;				
+#add-item-menu::-webkit-scrollbar {
+  display: none;
 }
 
 #add-item-menu .submenu {
@@ -110,7 +110,7 @@ body {
   width: 90%;
   margin: 1em 0 1em 5%;
 }
-  
+
 #template {
   display: none;
 }
@@ -129,10 +129,10 @@ body {
   width: 50vw;
 
   /* Style */
-  background: #FFFBF3;
+  background: #fffbf3;
   color: #26605b;
   border-radius: 10px;
-  box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.25);
+  box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.25);
 }
 
 .list-remove-button {
@@ -162,13 +162,13 @@ body {
   /* Style */
   background: #ffeac0;
   color: #26605b;
-  border-top-right-radius: 5px;
-  border-bottom-right-radius: 5px;
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
 }
 
 .expired-list-item-entry {
-  background-color:#FED5D8 ;
-  
+  background-color: #FED5D8;
+
 }
 
 .expired-list-item-entry .list-item-date {
@@ -176,7 +176,9 @@ body {
   color: white;
 }
 
-button:focus {outline:0;}
+button:focus {
+  outline: 0;
+}
 
 .remove-button {
   background-color: #60C0b7;
@@ -189,7 +191,7 @@ button:focus {outline:0;}
 }
 
 .remove-button:hover {
-  box-shadow: 0 5px 10px 0 rgba(0,0,0,0.1);
+  box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.1);
 }
 
 .choice {

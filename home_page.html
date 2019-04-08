@@ -27,11 +27,14 @@
   <!-- Local stylesheets -->
   <link rel="stylesheet" href="./css/home_page_style.css">
   <link rel="stylesheet" href="./css/simple_header.css">
+  <link rel="stylesheet" href="./wip/example.css">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+    integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
 
 </head>
 
 <body>
-  <div id="simple-header">
+  <div id="simple-header" style="font-size: 19.2px;">
     <div id="logo">FOODKEEP</div>
     <div id="nav">
       <div id="nav-home" style="border-top: 3px solid #97D6D0;border-bottom: 3px solid white;"><a
@@ -103,9 +106,58 @@
       <span class="sr-only">Next</span>
     </a>
   </div>
-  <div id="steps" class="jumbotron text-center">
-    <h1>How It Works</h1>
-    <h2>Track Your Food. Reduce Waste.</h2>
+  <div id="steps" class="jumbotron">
+    <div id="steps-heading"><span>TRACK YOUR FOOD</span>&#9;<span style="color:#E7636D">REDUCE WASTE</span></div>
+    <div id="example">
+      <div id="list-example" class="animate-bottom">
+        <div class="list-item" style="display: flex;">
+          <div class="list-item-entry expired-list-item-entry">
+            <div class="list-item-name">Coconut Milk</div>
+            <div class="list-item-date">4/2/2019</div>
+          </div>
+          <div class="list-remove-button"><a class="remove-button"><i
+                class="far fa-trash-alt"></i></a></div>
+        </div>
+        <div class="list-item" style="display: flex;">
+          <div class="list-item-entry expired-list-item-entry">
+            <div class="list-item-name">Soy Milk</div>
+            <div class="list-item-date">3/22/2019</div>
+          </div>
+          <div class="list-remove-button"><a class="remove-button"><i
+                class="far fa-trash-alt"></i></a></div>
+        </div>
+        <div class="list-item" style="display: flex;">
+          <div class="list-item-entry">
+            <div class="list-item-name">Yoghurt</div>
+            <div class="list-item-date">4/12/2019</div>
+          </div>
+          <div class="list-remove-button"><a class="remove-button"><i
+                class="far fa-trash-alt"></i></a></div>
+        </div>
+        <div class="list-item" style="display: flex;">
+          <div class="list-item-entry">
+            <div class="list-item-name">Asparagus</div>
+            <div class="list-item-date">4/14/2019</div>
+          </div>
+          <div class="list-remove-button"><a class="remove-button"><i
+                class="far fa-trash-alt"></i></a></div>
+        </div>
+        <div class="list-item" style="display: flex;">
+          <div class="list-item-entry">
+            <div class="list-item-name">Orange</div>
+            <div class="list-item-date">4/29/2019</div>
+          </div>
+          <div class="list-remove-button"><a class="remove-button"><i
+                class="far fa-trash-alt"></i></a></div>
+        </div>
+      </div>
+      <div id="list-explain">
+        <!--<div id="list-explain-text">You add. We track.</div>-->
+        <div id="example-button">
+          <a href="#" id="example-button-anchor">Get Started</a>
+        </div>
+      </div>
+    </div>
   </div>
   <div id="Menu" class="container-fluid text-center">
   </div>
