@@ -1,77 +1,166 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title>FoodKeep</title>
-    <meta charset="utf-8"/>
-    
-    <!-- AuthUI API -->
-    <script src="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.js"></script>
-    <link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.css" />
-    
-    <!-- Firebase API -->
-    <script src="https://www.gstatic.com/firebasejs/5.5.8/firebase.js"></script>
-    
-    <!-- JQuery API -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    
-    <!-- JQueryUI API and stylesheet -->
-    <link rel="stylesheet" href="./js/jquery-ui/jquery-ui.css">
-    <script src="./js/jquery-ui/jquery-ui.js"></script>
-    
-    <!-- Simple modal pop-up handler -->
-	<script src="./js/modal/jquery.leanModal.min.js"></script>
-    
-    <!-- Local stylesheets -->
-    <link rel="stylesheet" href = "./css/simple_header.css">
-    <link rel="stylesheet" href = "./css/homestyle.css">
-  </head>
-  <body>
-    <div id="content">
-    <div id="header">
-      <div id="title">Food Keep</div>
-      <div id="nav">
-        <div id="nav-home" style="border-top: 3px solid #193E4B;border-bottom: 3px solid white;"><a href="./home.html" class="anchor">Home</a></div>
-        <div id="nav-stats"><a href="./stats_page.html" class="anchor">Stats</a></div>
-        <div id="nav-list"><a href="./add_item_page.html" class="anchor">My List</a></div>
+<html lang="en">
+
+<head>
+  <title>FoodKeep</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- AuthUI API -->
+  <script src="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.js"></script>
+  <link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.css" />
+
+  <!-- Firebase API -->
+  <script src="https://www.gstatic.com/firebasejs/5.5.8/firebase.js"></script>
+
+  <!-- jQuery library -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+  <!-- Bootstrap API (Outdated) -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+
+  <!-- Simple modal pop-up handler -->
+  <script src="./js/modal/jquery.leanModal.min.js"></script>
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+
+  <!-- Local stylesheets -->
+  <link rel="stylesheet" href="./css/home_page_style.css">
+  <link rel="stylesheet" href="./css/simple_header.css">
+
+</head>
+
+<body>
+  <div id="simple-header">
+    <div id="logo">FOODKEEP</div>
+    <div id="nav">
+      <div id="nav-home" style="border-top: 3px solid #97D6D0;border-bottom: 3px solid white;"><a
+          href="./home_page.html" class="anchor">Home</a></div>
+      <div id="nav-stats"><a href="./stats_page.html" class="anchor">Stats</a></div>
+      <div id="nav-list"><a href="./add_item_page.html" class="anchor">My List</a></div>
+    </div>
+    <div id="login">
+      <a id="login-anchor" rel="leanModal" name="login-dialog" href="#login-dialog" class="anchor">Login</a>
+      <a href="#" id="logout-anchor" class="anchor">Sign Out</a>
+      <a href="#" class="anchor">Settings</a>
+      <div id="user-greeting" style="color: white; font-weight: bold;"></div>
+    </div>
+  </div>
+  <div id="login-dialog" title="Log In">
+    <div id="firebaseui-auth-container"></div>
+  </div>
+  <div class="modal-content" id="setting-pop">
+  </div>
+  <div id="sliding" class="carousel slide" data-ride="carousel">
+    <!--Indicators-->
+    <ol class="carousel-indicators">
+      <li data-target="#sliding" data-slide-to="0" class="active"></li>
+      <li data-target="#sliding" data-slide-to="1"></li>
+      <li data-target="#sliding" data-slide-to="2"></li>
+    </ol>
+    <div class="carousel-inner" role="listbox">
+      <div class="item active text-center">
+        <div class="carousel-caption">
+          <h1>It sucks wasting food,</h1>
+          <div class="action">
+            <a href="#steps">
+              <h2>Get Started</h2>
+            </a>
+          </div>
+        </div>
+        <img id="grocery" style="filter:saturate(60%)" src="./assets/images/small_egg.jpg" alt="egg" class="slidingImg">
       </div>
-      <div id="login">
-        <a href="#login-dialog" id="login-anchor" class="anchor">Login</a>
-        <a href="#" id="logout-anchor" class="anchor">Sign Out</a>
-        <a href="#" class="anchor">Settings</a>
+      <div class="item">
+        <div class="carousel-caption">
+          <h1>but it's hard to keep track when you're busy.</h1>
+          <div class="action">
+            <a href="#steps">
+              <h2>Get Started</h2>
+            </a>
+          </div>
+        </div>
+        <img style="filter:saturate(60%)" src="./assets/images/groceries.jpg" alt="veggie" class="slidingImg">
       </div>
+      <div class="item">
+        <div class="carousel-caption">
+          <h1>Let's change that.</h1>
+          <div class="action">
+            <a href="#steps">
+              <h2>Get Started</h2>
+            </a>
+          </div>
+        </div>
+        <img style="filter:saturate(65%)" src="./assets/images/freezer.jpg" alt="kitchen" class="slidingImg">
+      </div>
+
     </div>
-    <div id="login-dialog" title="Log In">
-      <div id="firebaseui-auth-container"></div>
-      <!--<div id="loader">Loading...</div>-->
-    </div>
-    </div>
-        <div id = "chooseOption">
-          <div id="mainBackground"></div>
-          <div id="camBox">
-            <div id = "camCircle">
-              <img src="./assets/images/camPic3.png" alt="Camera" class="choosePics"/>
+    <a class="left carousel-control" href="#sliding" role="button" data-slide="prev">
+      <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+      <span class="sr-only">Previous</span>
+    </a>
+    <a class="right carousel-control" href="#sliding" role="button" data-slide="next">
+      <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+      <span class="sr-only">Next</span>
+    </a>
+  </div>
+  <div id="steps" class="jumbotron text-center">
+    <h1>How It Works</h1>
+    <h2>Track Your Food. Reduce Waste.</h2>
+  </div>
+  <div id="Menu" class="container-fluid text-center">
+  </div>
+  <footer id="footy" class="text-center">
+    <div id="Contact" class="container-fluid">
+      <h1 class="text-center">Contact Us</h1>
+      <h3 class="text-center">Help us improve!</h3>
+      <div class="row test">
+        <div class="col-md-4">
+          <h3>&emsp; Send us questions or suggestions.</h3>
+        </div>
+        <div class="col-md-8">
+          <div class="row">
+            <div class="col-sm-5 form-group">
+              <input class="form-control" id="name" name="name" placeholder="Name" type="text" required="required">
             </div>
-            <div id = "camText">
-              Scan a recent grocery receipt.
+            <div class="col-sm-5 form-group">
+              <input class="form-control" id="email" name="email" placeholder="Email" type="email" required="required">
+            </div>
+            <div class="col-md-10 form-group">
+              <textarea class="form-control" id="comments" name="comments" placeholder="Question or Comment"
+                rows="5"></textarea>
+            </div>
+            <div class="col-md-10" form-group">
+              <button style="background-color:#668B8B" class="btn pull-right" type="submit">Send</button>
             </div>
           </div>
-            <div id="boxGap"></div>
-            <div id="pencilBox">
-              <div id ="pencilCircle">
-                <img src ="./assets/images/pencilPic2.png" alt="Pencil" class="choosePics" id="pencilPic">
-              </div>
-              <div id="pencilText">
-                Add grocery Items
-              </div>
-            </div>
-          </div>
-    
-    <!-- Firebase linking and auth scripts -->
-    <script src="./js/database/setup_firebase.js"></script>
-    <script src="./js/database/on_login_events.js"></script>
-    
-    <!-- LeanModal login dialog pop-up -->
-    <script>$("#login-anchor").leanModal();</script>
-    
-  </body>
+        </div>
+      </div>
+    </div>
+    <br />
+    <br />
+    <a class="up-arrow" href="#homePage" data-toggle="tooltip" title="TO TOP"><span style="color:white"
+        class="glyphicon glyphicon-chevron-up"></span></a><br /><br />
+    <h4>Corporate Policy &emsp; | &emsp; Terms & Conditions &emsp; | &emsp; Accessibility</h4>
+    <div class="container-fluid">
+      <h4 style="display:inline-block">Stay Connected &emsp;</h4>
+      <img style="width:3.5vh" src="./assets/images/facebook.png" alt="facebook" class="img-circle">
+      <img style="width:3.5vh" src="./assets/images/twitter.png" alt="twitter" class="img-circle">
+      <img style="width:3.5vh" src="./assets/images/insta.png" alt="instagram" class="img-circle">
+      <img style="width:3.5vh" src="./assets/images/pinterest.png" alt="pinterest" class="img-circle">
+    </div>
+    <br />
+    <p>FoodKeep &copy</p>
+    <br />
+  </footer>
+
+  <!-- Firebase linking and auth scripts -->
+  <script src="./js/database/setup_firebase.js"></script>
+  <script src="./js/database/on_login_events.js"></script>
+
+  <!-- LeanModal login dialog pop-up -->
+  <script>
+    $("#login-anchor").leanModal();
+  </script>
+</body>
+
 </html>

@@ -1,4 +1,4 @@
-(function() {
+(function () {
   var config = {
     apiKey: "AIzaSyBgIUMTcKedvx5m0w3yPoUtYUJ7XmVTwAY",
     authDomain: "foodkeep.firebaseapp.com",

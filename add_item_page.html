@@ -1,308 +1,123 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Food Keep</title>
-    
-    <!-- AuthUI API -->
-    <script src="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.js"></script>
-    <link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.css" />
-    
-    <!-- Firebase API -->
-    <script src="https://www.gstatic.com/firebasejs/5.5.8/firebase.js"></script>
-    
-    <!-- JQuery API -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    
-    <!-- JQueryUI API and stylesheet -->
-    <link rel="stylesheet" href="./js/jquery-ui/jquery-ui.css">
-    <script src="./js/jquery-ui/jquery-ui.js"></script>
-    
-    <!-- Simple modal pop-up handler -->
-	<script src="./js/modal/jquery.leanModal.min.js"></script>
-    
-    <!-- Add date and date object js -->
-    <script src="wip/jsonitem.js"></script>
-		
-    <!-- Local stylesheets -->
-    <link rel="stylesheet" href="./css/add_item_style.css">
-    <link rel="stylesheet" href = "./css/simple_header.css">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
-  </head>
-  <body>
-    <div id="header">
-      <div id="title">FOODKEEP</div>
-      <div id="nav">
-        <div id="nav-home"><a href="./home_page.html" class="anchor">Home</a></div>
-        <div id="nav-stats"><a href="./stats_page.html" class="anchor">Stats</a></div>
-        <div id="nav-list" style="border-top: 3px solid #97D6D0;border-bottom: 3px solid white;"><a href="./add_item_page.html" class="anchor">My List</a></div>
-      </div>
-      <div id="login">
-        <a id="login-anchor" rel="leanModal" name="login-dialog" href="#login-dialog" class="anchor">Login</a>
-        <a href="#" id="logout-anchor" class="anchor">Sign Out</a>
-        <a href="#" class="anchor">Settings</a>
-        <div id="user-greeting" style="color: white; font-weight: bold;"></div>
-      </div>
+
+<head>
+  <title>Food Keep</title>
+
+  <!-- AuthUI API -->
+  <script src="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.js"></script>
+  <link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.css" />
+
+  <!-- Firebase API -->
+  <script src="https://www.gstatic.com/firebasejs/5.5.8/firebase.js"></script>
+
+  <!-- JQuery API -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+  <!-- JQueryUI API and stylesheet -->
+  <link rel="stylesheet" href="./js/jquery-ui/jquery-ui.css">
+  <script src="./js/jquery-ui/jquery-ui.js"></script>
+
+  <!-- Simple modal pop-up handler -->
+  <script src="./js/modal/jquery.leanModal.min.js"></script>
+
+  <!-- Add date and date object js -->
+  <script src="wip/jsonitem.js"></script>
+
+  <!-- Local stylesheets -->
+  <link rel="stylesheet" href="./css/add_item_style.css">
+  <link rel="stylesheet" href="./css/simple_header.css">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+    integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+  <link rel="stylesheet" href="./css/item_loader_style.css">
+</head>
+
+<body onload="waitToLoad()">
+  <div id="simple-header">
+    <div id="logo">FOODKEEP</div>
+    <div id="nav">
+      <div id="nav-home"><a href="./home_page.html" class="anchor">Home</a></div>
+      <div id="nav-stats"><a href="./stats_page.html" class="anchor">Stats</a></div>
+      <div id="nav-list" style="border-top: 3px solid #97D6D0;border-bottom: 3px solid white;"><a
+          href="./add_item_page.html" class="anchor">My List</a></div>
+    </div>
+    <div id="login">
+      <a id="login-anchor" rel="leanModal" name="login-dialog" href="#login-dialog" class="anchor">Login</a>
+      <a href="#" id="logout-anchor" class="anchor">Sign Out</a>
+      <a href="#" class="anchor">Settings</a>
+      <div id="user-greeting" style="color: white; font-weight: bold;"></div>
+    </div>
+  </div>
+
+  <div id="content">
+    <div id="login-dialog">
+      <div id="firebaseui-auth-container"></div>
+    </div>
+    <div id="add-item-menu">
+
+      <!-- Collapsable Menu -->
+      <button class="dairy spoiler">Dairy</button>
+      <button id="milk-regular" class="dairy-item choice">2% Milk</button>
+      <button id="milk-coconut" class="dairy-item choice">Coconut Milk</button>
+      <button id="milk-soy" class="dairy-item choice">Soy Milk</button>
+      <button id="yoghurt" class="dairy-item choice">Yoghurt</button>
+
+      <button class="fruits spoiler">Fruits</button>
+      <button id="apple" class="fruits-item choice">Apple</button>
+      <button id="orange" class="fruits-item choice">Orange</button>
+      <button id="banana" class="fruits-item choice">Banana</button>
+      <button id="pear" class="fruits-item choice">Pear</button>
+
+      <button class="veggies spoiler">Veggies</button>
+      <button id="asparagus" class="veggies-item choice">Asparagus</button>
+      <button id="eggplant" class="veggies-item choice">Eggplant</button>
+      <button id="broccoli" class="veggies-item choice">Broccoli</button>
+      <button id="rottonFlesh" class="veggies-item choice">Rotten Flesh</button>
     </div>
 
-    <div id="content">
-      <div id="login-dialog">
-        <div id="firebaseui-auth-container"></div>
-        <!--<div id="loader">Loading...</div>-->
-      </div>
-      <div id="add-item-menu">
-        
-        <!-- Collapsable Menu -->
-        <button class="dairy spoiler">Dairy</button>
-        <button id="milk-regular" class="dairy-item choice">2% Milk</button>
-        <button id="milk-coconut" class="dairy-item choice">Coconut Milk</button>
-        <button id="milk-soy" class="dairy-item choice">Soy Milk</button>
-        <button id="yoghurt" class="dairy-item choice">Yoghurt</button>
-        
-        <button class="fruits spoiler">Fruits</button>
-        <button id="apple" class="fruits-item choice">Apple</button>
-        <button id="orange" class="fruits-item choice">Orange</button>
-        <button id="banana" class="fruits-item choice">Banana</button>
-        <button id="pear" class="fruits-item choice">Pear</button>
-        
-        <button class="veggies spoiler">Veggies</button>
-        <button id="asparagus" class="veggies-item choice">Asparagus</button>
-        <button id="eggplant" class="veggies-item choice">Eggplant</button>
-        <button id="broccoli" class="veggies-item choice">Broccoli</button>
-        <button id="rottonFlesh" class="veggies-item choice">Rotten Flesh</button>
-      </div>
-      
-      <div id="item-list">
-        <!-- New list item entry template -->
-        <div class="list-item" id="template">
-          <div class="list-item-entry">
-            <div class="list-item-name"></div>
-            <div class="list-item-date"></div>
-          </div>
-          <div class="list-remove-button"><button class="remove-button"><i class="far fa-trash-alt"></i></button></div>
+    <div id="item-list" style="margin:0;">
+      <!-- New list item entry template -->
+      <div class="list-item" id="template">
+        <div class="list-item-entry">
+          <div class="list-item-name"></div>
+          <div class="list-item-date"></div>
         </div>
-        <div id="item-container">
-          <!-- New list items go here! -->
-        </div>
+        <div class="list-remove-button"><button class="remove-button"><i class="far fa-trash-alt"></i></button></div>
       </div>
-
+      <div id="loader"></div>
+      <div id="item-container" style="display:none;" class="animate-bottom">
+        <!-- New list items go here! -->
+      </div>
     </div>
-    
-    <!------------- SCRIPTS ------------->
-    
-    
-    
-    <!-- Firebase linking and auth scripts -->
-    <script src="./js/database/setup_firebase.js"></script>
-    <script src="./js/database/on_login_events.js"></script>
-    
-    <!-- Testing out foldable divs WIP
-    <script>
-      $(document).ready(function(){
-        $("#open-test").click(function() {
-          console.log($("#item-description").css("display"));
-          if ($("#item-description").css("display") == "none") {
-            $("#item-description").show("drop");
-          } else {
-            $("#item-description").hide("drop");
-          }
-        })
-      });
-    </script> -->
-    
-    <!-- LeanModal login dialog pop-up -->
-    <script>$("#login-anchor").leanModal();</script>
-        
-    <!-- JQuery-UI auto button style -->
-    <script>//$('.choice, .remove-button, .generic-button').button();</script>
-    
-    <!-- Event handler for menu collapse -->
-    <script>
-      $('.spoiler').click(function() {
-        let item = $(this).attr('class').split(' ')[0];
-        $(this).parents('#add-item-menu').find('.' + item + '-item').fadeToggle();
-      });
-    </script>
-    
-    <!-- Event handler for the Update button (test purposes) -->
-    <script>
-      $('#update-div').click(function() {
-        let currUser = firebase.auth().currentUser;
-        $('#item-container').empty();
-        updateMe(currUser);
-      });
-    </script>
-		
-    <!-- Function that retrives item expiry date from fb -->
-	<script>
-      function refreshExpiry(uniqueId) {
-        let user = firebase.auth().currentUser;
-        console.log(user);
-        var dbRef = firebase.database().ref("users/" + user.uid + "/list/" + uniqueId).child("actualExpiry");
-        dbRef.once("value").then(function(snap){
-          $("#" + uniqueId + " .list-item-date").empty();
-          $("#" + uniqueId + " .list-item-date").append(snap.val());
-        });
-      }
-	</script>
-		
-    <!-- Function to refresh the list (used for Update button and executed on login/logout) -->
-    <script>
-      function updateMe(user) {
-        if (user) {
-          let listRef = firebase.database().ref("users/" + user.uid + '/list');
-          listRef.once('value').then(function(snapshot) {
-            snapshot.forEach(function(childSnapshot) {
-              let jsonItem = childSnapshot.val();
-              let retreivedName = jsonItem['itemName'];
-              let retreivedDate = jsonItem['actualExpiry'];
-              var retreivedExpire = jsonItem['isExpired'];
-              console.log(retreivedName + " " + retreivedExpire);
-              console.log(retreivedDate);
-              let itemId = childSnapshot.key;
-              dateCompare(retreivedDate, itemId, user.uid, retreivedName, retreivedExpire);
-              //(itemExpiryDate, itemId, user, itemName, retIsExpired)
-              addItemElement(itemId, retreivedName, retreivedDate);
-            });
-          });
-        }
-      }
-    </script>
-    
-    <!-- Function that appends a new list item based on the #template (must generate unique id before using) -->
-    <script>
-      function addItemElement(uniqueId, itemName, expiryDate) {
-        $("#template").clone().css("display", "flex").attr('id', uniqueId).appendTo("#item-container");
-        $("#" + uniqueId + " .list-item-name").append(itemName);
-		$("#" + uniqueId + " .list-item-date").append(expiryDate);
-        $("#" + uniqueId + " .remove-button").attr("id", uniqueId);
+  </div>
 
-        //Event handler for remove item button
-        $(".remove-button").click(function() {
-          let id = $(this).attr('id');
-          $("#" + id).remove();
-          let user = firebase.auth().currentUser;
-          firebase.database().ref("users/" + user.uid + "/list/").child(id).remove();
-        });
-      }
-    </script>
-     
-    <!-- Function that calculates the expiry date of a given item -->
-    <script>
-      function updateExpiry(itemId, itemName, callback) {
-		let itemObj = createItem(itemName);
-        let expiryDate;
-		let dbRef = firebase.database().ref("static/" +  itemName).child("expires");
-		dbRef.once("value").then(function(snap){
-          console.log(snap.val());
-          expiryDate = addDays(itemObj.date, parseInt(snap.val()))
-          expiryDate= (expiryDate.getMonth() + 1) + '/' + expiryDate.getDate() + "/" + expiryDate.getFullYear();
-          console.log("The added items expiry Date: " + expiryDate);
-          callback(itemId, itemName, expiryDate);
-        });
-        return expiryDate;
-      }
-    </script>
-    
-    <!-- Function that adds a new list item div and updates the firebase list with a new item -->
-    <script>
-      function addNewItem(itemId, itemName, itemExpiry) {
-        //Add the visual div component to the page
-        addItemElement(itemId, itemName, itemExpiry);
-        
-        //Add item information to the database
-        let user = firebase.auth().currentUser;
-        if (user) {
-          firebase.database().ref("users/" + user.uid + "/list/" + itemId).update(
-            {
-              "itemName" : itemName,
-              "actualExpiry" : itemExpiry
-            });
-        }
-      }
-    </script>
-    
-   <!-- Event handler for item choices that uses addItemElement function -->
-    <script>
-      $(".choice").click(function() {
-        let newId = 'id' + Date.now();
-        let pulledName = $(this).text();
-        
-        //Using callback to make sure updateExpiry is called before addNewItem
-        updateExpiry(newId, pulledName, addNewItem);
-      });
-    </script>
-    
-    <!-- Function that calculates if food is expired... Now adds expiring of fb for inbetween step-->
-    <script>
-       var checker;
-       function dateCompare(itemExpiryDate, itemId, user, itemName, retIsExpired) {
-         var name = itemName;
-         console.log("test : " + retIsExpired);
-        let date1 = new Date();
-        date1.setHours(0,0,0,0);
-        let date2 = new Date(itemExpiryDate);
-        let item = "#" + itemId;
-        console.log(item);
-         let datePast = date1 >= date2;
-          
-         if (datePast) {
-            $(document).ready(function(){
-            $(item + " .list-item-entry").attr('class', 'list-item-entry expired-list-item-entry');
-          });
+  <!------------- SCRIPTS ------------->
 
-        } else {
-          console.log("food is good to eat.")
-        }
-         
-         console.log("passed " + datePast);
-        if (datePast == true && retIsExpired != "expired") {
-          
-          
-          firebase.database().ref("users/" + user + "/list/" + itemId).update(
-            {
-              "isExpired" : "expiring"
-            });
-         
-           console.log(retIsExpired == "expiring");
-          if (retIsExpired == "expiring") {
-            firebase.database().ref("users/" + user + "/list/" + itemId).update(
-            {
-              "isExpired" : "expired"
-            });
-            var databaseRef = firebase.database().ref('users').child(user).child('expiredList').child(name);
-            databaseRef.transaction(function(numExpired) {
-              return (numExpired || 0) + 1;
-            });
-            
-          }
-         
-      };
-    }/*
-    var jsonItem;
-    var timesExpired;
-    var listRef;
-      //let things = null;
-      function getPrevExpired(userId, itemName) {
-          listRef = firebase.database().ref("users/" + userId + '/expiredList');
-          listRef.once('value').then(function(snapshot) {
-            snapshot.forEach(function(childSnapshot) {
-              jsonItem = childSnapshot.val();
-              timesExpired = jsonItem["timesExpired"];
-              checker = timesExpired;
-            //  things += checker;
-              console.log("checker 1 " + checker);
-            });
-          });
-        console.log("checker 2 " + checker);
-        console.log(jsonItem);
-        console.log(timesExpired);
-        
-      }*/
-      
-    
-    </script> 
+  <!-- Firebase linking and auth scripts -->
+  <script src="./js/database/setup_firebase.js"></script>
+  <script src="./js/database/on_login_events.js"></script>
 
-    
-    
-  </body>
+  <!-- Item list and expiry date logic scripts -->
+  <script src="./js/item_expiry_handler.js"></script>
+
+  <!-- Item load event handler -->
+  <script src="./js/item_load_anim.js"></script>
+
+  <!-- LeanModal login dialog pop-up -->
+  <script>
+    $("#login-anchor").leanModal();
+  </script>
+
+  <!-- Event handler for menu collapse -->
+  <script>
+    $('.spoiler').click(function () {
+      let item = $(this).attr('class').split(' ')[0];
+      $(this).parents('#add-item-menu').find('.' + item + '-item').fadeToggle();
+    });
+  </script>
+
+
+
+</body>
+
 </html>

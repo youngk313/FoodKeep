@@ -1,148 +1,74 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>FoodKeep</title>
-    <meta charset="utf-8"/>
-    
-    <!-- AuthUI API -->
-    <script src="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.js"></script>
-    <link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.css" />
-    
-    <!-- Firebase API -->
-    <script src="https://www.gstatic.com/firebasejs/5.5.8/firebase.js"></script>
-    
-    <!-- JQuery API -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    
-    <!-- JQueryUI API and stylesheet -->
-    <link rel="stylesheet" href="./js/jquery-ui/jquery-ui.css">
-    <script src="./js/jquery-ui/jquery-ui.js"></script>
-    
-    <!-- Simple modal pop-up handler -->
+
+<head>
+	<title>FoodKeep</title>
+	<meta charset="utf-8" />
+
+	<!-- AuthUI API -->
+	<script src="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.js"></script>
+	<link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.css" />
+
+	<!-- Firebase API -->
+	<script src="https://www.gstatic.com/firebasejs/5.5.8/firebase.js"></script>
+
+	<!-- JQuery API -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+	<!-- JQueryUI API and stylesheet -->
+	<link rel="stylesheet" href="./js/jquery-ui/jquery-ui.css">
+	<script src="./js/jquery-ui/jquery-ui.js"></script>
+
+	<!-- Simple modal pop-up handler -->
 	<script src="./js/modal/jquery.leanModal.min.js"></script>
-    
-    <!-- Charts.js API -->
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
-    <script src="./js/graphs/util.js"></script>
-    
-    <!-- Local stylesheets -->
-    <link rel="stylesheet" href = "./css/simple_header.css">
-		<link rel="stylesheet" href = "./css/stats_style.css">
-		
-		
-		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
-		<link rel="stylesheet" href = "./css/headstyle.css">
-		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
-    
-  </head>
-  <body id = "homePage" data-spy="scroll" data-target=".navbar" data-offset="50">
-			<nav style = "background-color: #97D6D0" class = "navbar navbar-default navbar-fixed-top text-center">
-					<div style = "display:inline-block;" class = "container-fluid">
-						<div class = "navbar-header">
-							<a class = "navbar-brand" href = "#"><h1 id="title" style ="color:white">FOODKEEP</h1></a>
-						</div>
-							<ul class = "nav navbar-nav text-center" style="padding: 0px;">
-								<li>
-									<a id = "mylist" href="./add_item_page.html"><h4>My List</h4></a>
-								</li>
-								<li class = "active"><a href="#Mystats"> <h4 style="border-bottom: 4px solid white; padding-bottom: 5px;"> My Stats </h4></a></li>
-								<li><a style="background-color: #97D6D0;" href = "#Contact"><h4>Contact</h4></a></li>
-								<li><a href ="#"><h4>Log In</h4></a></li>
-								<li>
-									<div id = "gearHold" class = "container">
-										<div id = "iconHolder" class = "container">
-											<h4 style = "vertical-align: middle">Settings</h4>
-										</div>
-									</div>
-								</li>
-							</ul>
-					</div>
-				</nav>
-    <div id="login-dialog" title="Log In">
-      <div id="firebaseui-auth-container"></div>
-      <!--<div id="loader">Loading...</div>-->
-    </div>
-    <div id="content">
-      <div id="graph-container">
-        <div id="graph">
-					<canvas id="chart-0"></canvas>
-				</div>
-      </div>
-    </div>
-    <!-- Firebase linking and auth scripts -->
-    <script src="./js/database/setup_firebase.js"></script>
-    <script src="./js/database/on_login_events.js"></script>
-    
-    <!-- LeanModal login dialog pop-up -->
-    <script>$("#login-anchor").leanModal();</script>
-    
+
+	<!-- Charts.js API -->
+	<script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+	<script src="./js/graphs/util.js"></script>
+
+	<!-- Local stylesheets -->
+
+	<link rel="stylesheet" href="./css/stats_style.css">
+	<link rel="stylesheet" href="./css/simple_header.css">
+</head>
+
+<body>
+	<div id="simple-header">
+		<div id="logo">FOODKEEP</div>
+		<div id="nav">
+			<div id="nav-home"><a href="./home_page.html" class="anchor">Home</a></div>
+			<div id="nav-stats" style="border-top: 3px solid #97D6D0;border-bottom: 3px solid white;"><a
+					href="./stats_page.html" class="anchor">Stats</a></div>
+			<div id="nav-list"><a href="./add_item_page.html" class="anchor">My List</a></div>
+		</div>
+		<div id="login">
+			<a id="login-anchor" rel="leanModal" name="login-dialog" href="#login-dialog" class="anchor">Login</a>
+			<a href="#" id="logout-anchor" class="anchor">Sign Out</a>
+			<a href="#" class="anchor">Settings</a>
+			<div id="user-greeting" style="color: white; font-weight: bold;"></div>
+		</div>
+	</div>
+	<div id="login-dialog" title="Log In">
+		<div id="firebaseui-auth-container"></div>
+	</div>
+	<div id="content">
+		<div id="graph-container">
+			<div id="graph">
+				<canvas id="chart-0"></canvas>
+			</div>
+		</div>
+	</div>
+	<!-- Firebase linking and auth scripts -->
+	<script src="./js/database/setup_firebase.js"></script>
+	<script src="./js/database/on_login_events.js"></script>
+
+	<!-- Graph generation script -->
+	<script src="./js/graph_scripts.js"></script>
+
+	<!-- LeanModal login dialog pop-up -->
 	<script>
-		var keysSorted;
-		function updateMe(user) {
-      if (user) {
-				let listRef = firebase.database().ref("users/" + user.uid + '/expiredList');
-				listRef.once('value').then(function(snapshot) {
-					console.log(snapshot.val());
-					var list = snapshot.val();
-					keysSorted = Object.keys(list).sort(function(a,b){return list[b]-list[a]});
-					console.log(keysSorted);
-					console.log(list[keysSorted[4]]);
-					console.log(keysSorted.length);
-					console.log(list.length);
+		$("#login-anchor").leanModal();
+	</script>
+</body>
 
-					var item1 = list[keysSorted[0]];
-					var item2 = list[keysSorted[1]];
-					var item3 = list[keysSorted[2]];
-					var item4 = list[keysSorted[3]];
-					var item5 = list[keysSorted[4]];
-				
-		if (keysSorted.length >= 5) {
-			var ctx = document.getElementById('chart-0').getContext('2d');
-			var myChart = new Chart(ctx, {
-
-					type: 'bar',
-					data: {
-							labels: [keysSorted[0], keysSorted[1], keysSorted[2], keysSorted[3], keysSorted[4]],
-							datasets: [{
-									label: 'Your 5 most expired Items so far: ',
-									data: [item1, item2, item3, item4, item5],
-									backgroundColor: [
-											'rgba(255, 99, 132, 0.2)',
-											'rgba(54, 162, 235, 0.2)',
-											'rgba(255, 206, 86, 0.2)',
-											'rgba(75, 192, 192, 0.2)',
-											'rgba(153, 102, 255, 0.2)'
-									],
-									borderColor: [
-											'rgba(255, 99, 132, 1)',
-											'rgba(54, 162, 235, 1)',
-											'rgba(255, 206, 86, 1)',
-											'rgba(75, 192, 192, 1)',
-											'rgba(153, 102, 255, 1)'
-									],
-									borderWidth: 3
-							}]
-					},
-					options: {
-							scales: {
-									yAxes: [{
-											ticks: {
-													beginAtZero: true
-											}
-									}]
-							}
-					}
-			});
-			myChart.canvas.parentNode.style.height = '300px';
-			myChart.canvas.parentNode.style.width = '600px';
-			myChart.canvas.parentNode.style.boxShadow = '0px 0px 10px rgba(0, 0, 0, .5)';
-	} else{
-		console.log("Not enough Data");
-	}
-
-});
-				}
-		}  
-</script>
-  </body>
 </html>
