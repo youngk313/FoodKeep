@@ -62,7 +62,7 @@ a.remove-button:hover {
     background-position: right top;
     background-repeat: no-repeat;
     padding-left: 15%;
-
+    margin: 0;
 }
 
 #steps-heading {
@@ -70,6 +70,7 @@ a.remove-button:hover {
     font-weight: 500;
     letter-spacing: 4pt;
     text-align: center;
+    padding-top: 1em;
 }
 
 #example {
@@ -92,6 +93,7 @@ a.remove-button:hover {
     align-items: center;
     width: 35vw;
     font-size: 1.6em;
+    padding-bottom: 1em;
 }
 
 #list-explain-button {

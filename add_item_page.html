@@ -53,27 +53,29 @@
     <div id="login-dialog">
       <div id="firebaseui-auth-container"></div>
     </div>
+    <div id="transparent-bg">
     <div id="add-item-menu">
 
       <!-- Collapsable Menu -->
-      <button class="dairy spoiler">Dairy</button>
-      <button id="milk-regular" class="dairy-item choice">2% Milk</button>
-      <button id="milk-coconut" class="dairy-item choice">Coconut Milk</button>
-      <button id="milk-soy" class="dairy-item choice">Soy Milk</button>
-      <button id="yoghurt" class="dairy-item choice">Yoghurt</button>
+      <a class="dairy spoiler spoiler-button">Dairy</a>
+      <div class="dairy-item choice"><a id="milk-regular" class="choice-button">2% Milk</a></div>
+      <div class="dairy-item choice"><a id="milk-coconut" class="choice-button">Coconut Milk</a></div>
+      <div class="dairy-item choice"><a id="milk-soy" class="choice-button">Soy Milk</a></div>
+      <div class="dairy-item choice"><a id="yoghurt" class="choice-button">Yoghurt</a></div>
 
-      <button class="fruits spoiler">Fruits</button>
-      <button id="apple" class="fruits-item choice">Apple</button>
-      <button id="orange" class="fruits-item choice">Orange</button>
-      <button id="banana" class="fruits-item choice">Banana</button>
-      <button id="pear" class="fruits-item choice">Pear</button>
+      <a class="fruits spoiler spoiler-button">Fruits</a>
+      <div class="fruits-item choice"><a id="apple" class="choice-button">Apple</a></div>
+      <div class="fruits-item choice"><a id="orange" class="choice-button">Orange</a></div>
+      <div class="fruits-item choice"><a id="banana" class="choice-button">Banana</a></div>
+      <div class="fruits-item choice"><a id="pear" class="choice-button">Pear</a></div>
 
-      <button class="veggies spoiler">Veggies</button>
-      <button id="asparagus" class="veggies-item choice">Asparagus</button>
-      <button id="eggplant" class="veggies-item choice">Eggplant</button>
-      <button id="broccoli" class="veggies-item choice">Broccoli</button>
-      <button id="rottonFlesh" class="veggies-item choice">Rotten Flesh</button>
+      <a class="veggies spoiler spoiler-button">Veggies</a>
+      <div class="veggies-item choice"><a id="asparagus" class="choice-button">Asparagus</a></div>
+      <div class="veggies-item choice"><a id="eggplant" class="choice-button">Eggplant</a></div>
+      <div class="veggies-item choice"><a id="broccoli" class="choice-button">Broccoli</a></div>
+      <div class="veggies-item choice"><a id="rottonFlesh" class="choice-button">Rotten Flesh</a></div>
     </div>
+  </div>
 
     <div id="item-list" style="margin:0;">
       <!-- New list item entry template -->
@@ -82,7 +84,7 @@
           <div class="list-item-name"></div>
           <div class="list-item-date"></div>
         </div>
-        <div class="list-remove-button"><button class="remove-button"><i class="far fa-trash-alt"></i></button></div>
+        <div class="list-remove-button"><a class="remove-button"><i class="far fa-trash-alt"></i></a></div>
       </div>
       <div id="loader"></div>
       <div id="item-container" style="display:none;" class="animate-bottom">
