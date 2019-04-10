@@ -1,16 +1,20 @@
 firebase.auth().onAuthStateChanged(function (user) {
-    var keysSorted;
-    
+    var keysSorted = [];
+
     if (user) {
-      
+
         let listRef = firebase.database().ref("users/" + user.uid + '/expiredList');
         listRef.once('value').then(function (snapshot) {
             var list = snapshot.val();
-            keysSorted = Object.keys(list).sort(function (a, b) {
-                return list[b] - list[a]
-            });
+            try {
+                keysSorted = Object.keys(list).sort(function (a, b) {
+                    return list[b] - list[a]
+                });
+            } catch (err) {
+                console.log("Not enough data");
+            }
             if (keysSorted.length >= 5) {
-              
+
                 var ctx = document.getElementById('chart-0').getContext('2d');
                 var myChart = new Chart(ctx, {
                     type: 'bar',
@@ -50,10 +54,10 @@ firebase.auth().onAuthStateChanged(function (user) {
                 myChart.canvas.parentNode.style.height = '300px';
                 myChart.canvas.parentNode.style.width = '600px';
                 myChart.canvas.parentNode.style.boxShadow = '0px 0px 5px rgba(0, 0, 0, .5)';
-              myChart.canvas.parentNode.style.backgroundColor = 'rgba(255, 255, 255, .90)';
-              document.getElementById('graphTitle').innerHTML = "MY <span id='greenWord'>FOOD</span> ACTIVITY";
+                myChart.canvas.parentNode.style.backgroundColor = 'rgba(255, 255, 255, .90)';
+                document.getElementById('graphTitle').innerHTML = "MY <span id='greenWord'>FOOD</span> ACTIVITY";
             } else {
-                document.getElementById('graphTitle').innerHTML = "Not enough data";
+                document.getElementById('graphTitle').innerHTML = "<span id=\"greenWord\">PLEASE</span> TRY AGAIN LATER<br><small>Not enough data</small>";
             }
         });
     }
