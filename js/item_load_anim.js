@@ -1,7 +1,7 @@
 var myVar;
 
 function waitToLoad() {
-    myVar = setTimeout(showItems, 1000);
+    myVar = setTimeout(showItems, 400);
 }
 
 function showItems() {
