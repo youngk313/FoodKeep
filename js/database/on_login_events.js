@@ -26,10 +26,10 @@
   ui.start('#firebaseui-auth-container', uiConfig);
 })();
 
-(function () {
+(function (){
   firebase.auth().onAuthStateChanged(function (user) {
     if (user) {
-      //Log In...
+      //Logged In...
       var promise = firebase.database().ref("users/" + user.uid).update({
         "name": user.displayName,
         "email": user.email
@@ -42,12 +42,13 @@
       $('#user-greeting').html('Hi ' + firstName + '!');
       $('#user-greeting').show();
     } else {
-      //Log Out...
+      //Logged Out...
       $('#logout-anchor').hide();
       $('#user-greeting').hide();
       $('#login-anchor').show();
       $('#item-container').empty();
       $('#user-greeting').empty();
+
     }
   });
 })();

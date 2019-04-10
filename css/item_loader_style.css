@@ -63,6 +63,17 @@
     }
 }
 
+#scrollbottom {
+    position: fixed;
+    top: 80px;
+    z-index: 99;
+}
+
+#scrolltop {
+    position:fixed;
+    bottom: 10px;
+}
+
 #item-container {
     display: none;
     text-align: center;

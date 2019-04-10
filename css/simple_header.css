@@ -13,21 +13,21 @@ body {
   font-size: 1.2em;
 }
 /* vidhi color #97D6D0 */
-#logo, #nav, #login {
+#logo, #Snav, #login {
   font-family: 'Roboto', sans-serif;
   padding: 1em !important;
   display: flex;
   align-items: center;
 }
 
-#nav > div {
+#Snav > div {
   display: flex;
   align-items: center;
   height: 75px;
   box-sizing: border-box;
   margin: 0 1em 0 1em;
 }
-#nav {
+#Snav {
   width: 50vw;
 }
 

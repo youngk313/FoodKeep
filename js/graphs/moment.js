@@ -141,7 +141,8 @@
             });
             var isNowValid = !isNaN(m._d.getTime()) &&
                 flags.overflow < 0 &&
-                !flags.empty &&
+                !flags.e
+                mpty &&
                 !flags.invalidMonth &&
                 !flags.invalidWeekday &&
                 !flags.weekdayMismatch &&

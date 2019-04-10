@@ -33,12 +33,13 @@
 
 </head>
 
-<body>
+<body id = "homePage" data-spy="scroll" data-target=".navbar" data-offset="50">
   <div id="simple-header" style="font-size: 19.2px;">
     <div id="logo">FOODKEEP</div>
-    <div id="nav">
+    <div id="Snav">
       <div id="nav-home" style="border-top: 3px solid #97D6D0;border-bottom: 3px solid white;"><a
           href="./home_page.html" class="anchor">Home</a></div>
+      <div id="nav-about"><a href="./about_page.html" class="anchor">About</a></div>   
       <div id="nav-stats"><a href="./stats_page.html" class="anchor">Stats</a></div>
       <div id="nav-list"><a href="./add_item_page.html" class="anchor">My List</a></div>
     </div>
@@ -107,7 +108,7 @@
     </a>
   </div>
   <div id="steps" class="jumbotron">
-    <div id="steps-heading"><span>TRACK YOUR FOOD</span>&#9;<span style="color:#E7636D">REDUCE WASTE</span></div>
+    <div id="steps-heading"><span>TRACK YOUR FOOD.</span>&#9;<span style="color:#E7636D">REDUCE WASTE.</span></div>
     <div id="example">
       <div id="list-example" class="animate-bottom">
         <div class="list-item" style="display: flex;">
@@ -154,7 +155,7 @@
       <div id="list-explain">
         <!--<div id="list-explain-text">You add. We track.</div>-->
         <div id="example-button">
-          <a href="#" id="example-button-anchor">Get Started</a>
+          <a href="./add_item_page.html" id="example-button-anchor">Start Now</a>
         </div>
       </div>
     </div>
@@ -181,7 +182,7 @@
               <textarea class="form-control" id="comments" name="comments" placeholder="Question or Comment"
                 rows="5"></textarea>
             </div>
-            <div class="col-md-10" form-group">
+            <div class="col-md-10 form-group">
               <button style="background-color:#668B8B" class="btn pull-right" type="submit">Send</button>
             </div>
           </div>
@@ -213,6 +214,7 @@
   <script>
     $("#login-anchor").leanModal();
   </script>
+
 </body>
 
 </html>

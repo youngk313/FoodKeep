@@ -21,32 +21,6 @@ li.active > a {
 
 }
 
-#missBackground {
-  background-color: #97D6BB;
-  color:white;
-  border: 1px solid grey;
-}
-
-#aboutPic {
-  width: 25vw;
-  float:left;
-  margin-right: 20px;
-  border-radius: 10px;
-}
-
-.aboutHeading {
-    text-align:center;
-}
-
-#missionStatement {
-  margin-left: 50px;
-  margin-right: 60px;
-  text-align: justify;
-  display: inline-block;
-  line-height: 25px;
-  font-size: 11pt;
-}
-
 #settingsBar {
   position: fixed;
   width: 30%;
@@ -67,14 +41,31 @@ li.active > a {
    background-color: #97D6D0;
 }
 
+#aboutPic {
+  width: 40vw;
+  border-radius: 10px;
+  float: left;
+  margin-left: 40px;
+  margin-bottom: 40px;
+  display: inline-block;
+}
+
+#missionStatement {
+  font-size: 12.5pt;
+  padding-left: 20px;
+  display: inline;
+  text-align: justify;
+  margin-right: 20px;
+}
+
 nav div {
   display: inline-block;
 }
 
 nav h4 {
   color: #F5F5F5;
-  font-size: 16pt;
-  font-family: "title";
+  font-size: 14pt;
+  font-family: "jumbo";
   padding-left: 10px;
   padding-right:10px;
 
@@ -92,7 +83,18 @@ nav h4 {
 .jumbotron{
   background-color: #FFFFFF;
   color: #97D0B5;
-  font-weight: bold;
+}
+
+.jumbotron h1 {
+  font-family: "jumbo";
+}
+
+.jumbotron h2 {
+  font-family: "littlejumb";
+}
+
+.jumbotron h3 {
+  font-family: "littlejumb";
 }
 
 .item{
@@ -124,11 +126,10 @@ nav h4 {
 }
 
 #footy{
-  margin-top: 200px;
+  padding-top: 30px;
   background-color: #97DAD0;
-  text-align: center;
   color: #FFFFFF;
-  text-shadow: 1px 1px 2px grey;
+  font-family: "title";
 }
 
 .slidingImg{
@@ -149,12 +150,22 @@ button{
 
 #title{
   font-size: 32pt;
-  font-family: "title";
+  font-family: "jumbo";
   vertical-align: middle;
   transform: translateY(-15px);
   margin-left: 20px;
   margin-right: 20px;
 
+}
+
+#steps div {
+  border: 2px solid;
+  box-shadow: 0px 0px 2px grey;
+  width: 35%;
+  text-align: left;
+  padding-left: 40px;
+  display:inline-block;
+  cursor: pointer;
 }
 
 #iconHolder {
@@ -274,6 +285,33 @@ button{
 transform: translateY(2px);
 }
 
+.expiryIndyRed {
+  height: 25px;
+  width: 25px;
+  background-color: #f00;
+  border-radius: 50%;
+  display: inline-block;
+  transform: translateY(8px);
+  margin-left: 15px;
+  margin-top: 20px;
+}
+
+.expiryIndyGreen {
+  height: 25px;
+  width: 25px;
+  background-color: #0f0;
+  border-radius: 50%;
+  display: inline-block;
+  transform: translateY(8px);
+  margin-left: 15px;
+  margin-top: 20px;
+}
+
+.directions {
+
+  margin-top: 60px;
+}
+
 .butHeadings{
   font-size: 14pt;
 }
@@ -317,7 +355,6 @@ transform: translateY(2px);
 body{
   margin:0;
   font-family: "title";
-  font-family: 'Roboto', sans-serif;
 }
 
 /*Font imports*/
@@ -329,6 +366,11 @@ body{
 @font-face{
   font-family: "jumbo";
   src: url("../assets/fonts/Vollkorn-Bold.ttf");
+}
+
+@font-face {
+  font-family: "littlejumb";
+  src: url("../assets/fonts/Vollkorn-Regular.ttf");
 }
 
 @font-face{

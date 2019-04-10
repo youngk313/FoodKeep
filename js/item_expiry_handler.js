@@ -22,6 +22,7 @@ function addItemElement(uniqueId, itemName, expiryDate) {
     $("#" + uniqueId + " .list-item-name").append(itemName);
     $("#" + uniqueId + " .list-item-date").append(expiryDate);
     $("#" + uniqueId + " .remove-button").attr("id", uniqueId);
+    $("#anchorbottom").focus().val('');
     //Event handler for remove item button
     $(".remove-button").click(function () {
         let id = $(this).attr('id');
