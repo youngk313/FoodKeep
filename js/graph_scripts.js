@@ -1,6 +1,8 @@
 firebase.auth().onAuthStateChanged(function (user) {
     var keysSorted;
+    
     if (user) {
+      
         let listRef = firebase.database().ref("users/" + user.uid + '/expiredList');
         listRef.once('value').then(function (snapshot) {
             var list = snapshot.val();
@@ -8,6 +10,7 @@ firebase.auth().onAuthStateChanged(function (user) {
                 return list[b] - list[a]
             });
             if (keysSorted.length >= 5) {
+              
                 var ctx = document.getElementById('chart-0').getContext('2d');
                 var myChart = new Chart(ctx, {
                     type: 'bar',
@@ -46,9 +49,11 @@ firebase.auth().onAuthStateChanged(function (user) {
                 });
                 myChart.canvas.parentNode.style.height = '300px';
                 myChart.canvas.parentNode.style.width = '600px';
-                myChart.canvas.parentNode.style.boxShadow = '0px 0px 10px rgba(0, 0, 0, .5)';
+                myChart.canvas.parentNode.style.boxShadow = '0px 0px 5px rgba(0, 0, 0, .5)';
+              myChart.canvas.parentNode.style.backgroundColor = 'rgba(255, 255, 255, .90)';
+              document.getElementById('graphTitle').innerHTML = "MY <span id='greenWord'>FOOD</span> ACTIVITY";
             } else {
-                console.log("Not enough Data");
+                document.getElementById('graphTitle').innerHTML = "Not enough data";
             }
         });
     }
