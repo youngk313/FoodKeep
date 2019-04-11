@@ -46,6 +46,7 @@ firebase.auth().onAuthStateChanged(function (user) {
                         },
                           title: {
                             display: true,
+                            fontSize: 18,
                             text: 'Your 5 most expired Items so far:'
                          },
                         scales: {
