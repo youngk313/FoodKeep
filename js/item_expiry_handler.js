@@ -18,7 +18,7 @@ function updateList(user) {
 
 //Function that appends a new list item based on the #template (must generate unique id before using)
 function addItemElement(uniqueId, itemName, expiryDate) {
-    $("#template").clone().css("display", "flex").attr('id', uniqueId).prependTo("#item-container");
+    $("#template").clone().css("display", "flex").attr('id', uniqueId).appendTo("#item-container");
     $("#" + uniqueId + " .list-item-name").append(itemName);
     $("#" + uniqueId + " .list-item-date").append(expiryDate);
     $("#" + uniqueId + " .remove-button").attr("id", uniqueId);
