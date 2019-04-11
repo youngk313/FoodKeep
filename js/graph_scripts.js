@@ -21,7 +21,6 @@ firebase.auth().onAuthStateChanged(function (user) {
                     data: {
                         labels: [keysSorted[0], keysSorted[1], keysSorted[2], keysSorted[3], keysSorted[4]],
                         datasets: [{
-                            label: 'Your 5 most expired Items so far: ',
                             data: [list[keysSorted[0]], list[keysSorted[1]], list[keysSorted[2]], list[keysSorted[
                                 3]], list[keysSorted[4]]],
                             backgroundColor: [
@@ -42,6 +41,13 @@ firebase.auth().onAuthStateChanged(function (user) {
                         }]
                     },
                     options: {
+                        legend: {
+                            display: false,
+                        },
+                          title: {
+                            display: true,
+                            text: 'Your 5 most expired Items so far:'
+                         },
                         scales: {
                             yAxes: [{
                                 ticks: {
