@@ -68,6 +68,6 @@ firebase.auth().onAuthStateChanged(function (user) {
             }
         });
     } else {
-        document.getElementById('graphTitle').innerHTML = "<span id=\"greenWord\">PLEASE</span> LOG IN<br>";
+        document.getElementById('graphTitle').innerHTML = "<span id=\"greenWord\">Please</span> Log In!";
     }
 });

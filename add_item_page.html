@@ -21,7 +21,6 @@
   <!-- Simple modal pop-up handler -->
   <script src="./js/modal/jquery.leanModal.min.js"></script>
 
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
   <!-- Add date and date object js -->
@@ -39,7 +38,7 @@
   <div id="simple-header">
     <div id="logo">FOODKEEP</div>
     <div id="Snav">
-      <div id="nav-home"><a href="./home_page.html" class="anchor">Home</a></div>
+      <div id="nav-home"><a href="./index.html" class="anchor">Home</a></div>
       <div id="nav-about"><a href="./about_page.html" class="anchor">About</a></div> 
       <div id="nav-stats"><a href="./stats_page.html" class="anchor">Stats</a></div>
       <div id="nav-list" style="border-top: 3px solid #97D6D0;border-bottom: 3px solid white;"><a
@@ -83,7 +82,7 @@
 
     <div id="item-list" style="margin:0;">
       <div id = "anchortop">
-        <h1 style = "color:grey;" id = "loginWarning">You must be logged in to add items!</h1>
+        <h1 style = "color:grey; font-size: 2em;" id = "page-heading"></h1>
       </div>
       <div id = "scrollbottom">
           <a id="scrollToBottom"><i class="fas fa-chevron-circle-down"></i></a>
@@ -149,13 +148,13 @@
            $('#scrolltop').show();
             $('#scrollbottom').show();
             $('#transparent-bg').show();
-            $('#loginWarning').hide();
+            $('#page-heading').html("My Item List");
         } else {
           $('#add-item-menu').hide();
               $('#scrolltop').hide();
             $('#scrollbottom').hide();
             $('#transparent-bg').hide();
-          $('#loginWarning').show();          
+            $('#page-heading').html("Please Log In!");        
         }
       });
 });
