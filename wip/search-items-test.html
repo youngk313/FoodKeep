@@ -1,0 +1,139 @@
+<html>
+  <head>
+    <!-- JQuery API -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    
+    <!-- JQueryUI API and stylesheet -->
+    <link rel="stylesheet" href="../js/jquery-ui/jquery-ui.css">
+    <script src="../js/jquery-ui/jquery-ui.js"></script>
+		
+    <!-- Local stylesheets -->
+    <link rel="stylesheet" href="../css/add_item_style.css">
+    <link rel="stylesheet" href = "../css/simple_header.css">
+    
+  <style>
+    .ui-autocomplete-category {
+      font-weight: bold;
+      padding: .2em .4em;
+      margin: .8em 0 .2em;
+      line-height: 1.5;
+    }
+  </style>
+  </head>
+  
+  <body>
+    <div id="add-item-menu">
+      <div class="ui-widget">
+        <label for="foods">Find: </label>
+        <input id="foods" placeholder="Milk...">
+      </div>
+      <!-- Collapsable Menu -->      
+      <button class="dairy spoiler">Dairy</button>
+      <button id="milk-regular" class="dairy-item choice">2% Milk</button>
+      <button id="milk-coconut" class="dairy-item choice">Coconut Milk</button>
+      <button id="milk-soy" class="dairy-item choice">Soy Milk</button>
+      <button id="yoghurt" class="dairy-item choice">Yoghurt</button>
+      
+      <button class="fruits spoiler">Fruits</button>
+      <button id="apple" class="fruits-item choice">Apple</button>
+      <button id="orange" class="fruits-item choice">Orange</button>
+      <button id="banana" class="fruits-item choice">Banana</button>
+      <button id="pear" class="fruits-item choice">Pear</button>
+      
+      <button class="veggies spoiler">Veggies</button>
+      <button id="asparagus" class="veggies-item choice">Asparagus</button>
+      <button id="eggplant" class="veggies-item choice">Eggplant</button>
+      <button id="broccoli" class="veggies-item choice">Broccoli</button>
+    </div>
+    
+    <!-- JQuery-UI auto dialog style -->
+    <script>
+      $( function() {
+        $( "#login-dialog" ).dialog({
+          autoOpen: false,
+          draggable: false
+        });
+      });
+    </script>
+    
+    <!-- JQuery-UI auto button style -->
+    <script>$('.choice, .spoiler, .remove-button, .generic-button').button();</script>
+    
+    
+    <script>
+      $(function() {
+        $.widget( "custom.foodsearch", $.ui.autocomplete, {
+          _create: function() {
+            this._super();
+            this.widget().menu( "option", "items", "> :not(.ui-autocomplete-category)" );
+          },
+          _renderMenu: function( ul, items ) {
+            var that = this,
+              currentCategory = "";
+            $.each( items, function( index, item ) {
+              var li;
+              if ( item.category != currentCategory ) {
+                ul.append( "<li class='ui-autocomplete-category'>" + item.category + "</li>" );
+                currentCategory = item.category;
+              }
+              li = that._renderItemData( ul, item );
+              if ( item.category ) {
+                li.attr( "aria-label", item.category + " : " + item.label );
+              }
+            });
+          }
+        });
+        var data = [
+          { label: "2% Milk", category: "Dairy" },
+          { label: "Coconut Milk", category: "Dairy" },
+          { label: "Soy Milk", category: "Dairy" },
+          { label: "Yoghurt", category: "Dairy" },
+          { label: "Apple", category: "Fruits" },
+          { label: "Orange", category: "Fruits" },
+          { label: "Banana", category: "Fruits" },
+          { label: "Pear", category: "Fruits" },
+          { label: "Asparagus", category: "Veggies" },
+          { label: "Eggplant", category: "Veggies" },
+          { label: "Broccoli", category: "Veggies" }
+        ];
+        function split( val ) {
+          return val.split( /,\s*/ );
+        }
+        function extractLast( term ) {
+          return split( term ).pop();
+        }
+        $( "#foods" ).foodsearch({
+          minLength: 0,
+          source: function( request, response ) {
+            // delegate back to autocomplete, but extract the last term
+            response( $.ui.autocomplete.filter(
+              data, extractLast( request.term ) ) );
+          },
+          focus: function() {
+            // prevent value inserted on focus
+            return false;
+          },
+          select: function( event, ui ) {
+            var terms = split( this.value );
+            // remove the current input
+            terms.pop();
+            // add the selected item
+            terms.push( ui.item.value );
+            // add placeholder to get the comma-and-space at the end
+            terms.push( "" );
+            this.value = terms.join( ", " );
+            return false;
+          }
+        });
+      });
+  </script>
+    
+    <!-- Event handler for menu collapse -->
+    <script>
+      $('.spoiler').click(function() {
+        let item = $(this).attr('class').split(' ')[0];
+        $(this).parents('#add-item-menu').find('.' + item + '-item').fadeToggle();
+      });
+    </script>
+  </body>
+</html>

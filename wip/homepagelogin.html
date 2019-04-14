@@ -1,0 +1,49 @@
+<!DOCTYPE HTML>
+<html lang = "en">
+  <head>
+    <title>FoodKeep</title>
+    <meta charset="utf-8"/>
+    
+    <!-- AuthUI API -->
+    <script src="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.js"></script>
+    <link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.css" />
+    
+    <!-- Firebase API -->
+    <script src="https://www.gstatic.com/firebasejs/5.5.8/firebase.js"></script>
+    <script src="../database/setup_firebase.js"></script>
+    
+    <!-- JQuery API -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    
+    <!-- JQueryUI API and stylesheet -->
+    <link rel="stylesheet" href="../jquery-ui/jquery-ui.css">
+    <script src="../jquery-ui/jquery-ui.js"></script>
+    
+    <!-- Local stylesheet -->
+    <link rel="stylesheet" href = "../simple_header.css">
+  </head>
+  <body>
+    <div id="header">
+      <div id="title">Food Keep</div>
+      <div id="nav">Home | Stats | My Items</div>
+      <div id="login"><a href="#" id="login-anchor">Log In</a><a href="#" id="logout-anchor">Log Out</a></div>
+    </div>
+    
+    <div id="login-dialog" title="Log In">
+      <div id="firebaseui-auth-container"></div>
+      <div id="loader">Loading...</div>
+    </div>
+    
+    <script>
+      $( function() {
+        $( "#login-dialog" ).dialog({
+          autoOpen: false,
+          draggable: false
+        });
+      });
+    </script>
+    
+    <!-- Firebase Login and Logout handling using AuthUI API -->
+    <script src="../database/on_login_events.js"></script>
+  </body>
+</html>

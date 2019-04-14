@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang = "en">
+  <head>
+    <meta charset = "utf-8">
+    <style>
+      #gearHold{
+        width:300px;
+        float:right;
+        text-align: right;
+        margin-right: none;
+      }
+      #iconHolder{
+        border: 2px solid white;
+        border-radius: 10px;
+        box-shadow: 0px 0px 4px grey;
+        width:70px;
+        height:65px;
+        text-align: center;
+        display:inline-block;
+        margin-right: 10px;
+      }
+      #gearPic{
+        width:60px;
+        height:60px;
+      }
+      #notHead{
+        margin-right: 80px;
+        font-size: 16pt;
+        font-weight: bold;
+      }
+      #butSave{
+        background-color: green;
+      }
+      #butCancel{
+        background-color: red;
+      }
+      body{
+        padding: none;
+        font-family: "nav_head";
+      }
+      .slider {
+       -webkit-appearance: none;
+        width: 20%;
+        height: 15px;
+        border-radius: 8px;
+        background: #d3d3d3;
+        outline: none;
+        opacity: 1;
+        -webkit-transition: .3s;
+        transition: opacity .2s;
+        margin-bottom: 20px;
+        margin-right: 20px;
+      }
+
+      .slider::-webkit-slider-thumb{
+        -webkit-appearance: none;
+        appearance: none;
+        width: 25px;
+        height: 25px;
+        border-radius: 50%;
+        background: #f79693;
+        cursor: pointer;
+      }
+      .slider::-moz-range-thumb{
+        width: 25px;
+        height: 25px;
+        border-radius: 50%;
+        cursor: pointer;
+      }
+      .setHeadings{
+        display: inline-block;
+        line-height: 8px;
+        margin-right: 20px;
+        font-size: 14pt;
+      }
+      .method_select{
+        margin-right: 20px;
+      }
+      .method_select select{
+        width: 120px;
+        font-size: 10pt;
+      }
+      .select-selected{
+        background-color: #f79693;
+      }
+      .select-selected:after{
+        position:absolute;
+        content:"";
+        border-color: #f79693;
+      }
+      .select-items{
+        position:absolute;
+        background-color: #f79693;
+        z-index: 99;
+      }
+      .select-hide{
+        display: none;
+      }
+      .button{
+        display:inline-block;
+        border: 2px solid;
+        margin: 0 auto;
+        width: 90px;
+        height: 80px;
+        text-align: center;
+        margin-right: 30px;
+        margin-top: 20px;
+        margin-bottom: 20px;
+        border-radius: 10px;
+        font-family:"settingfont";
+        box-shadow: 2px 2px 4px grey;
+      }
+      .butHeadings{
+        text-shadow: 2px 2px 4px white;
+        font-size: 20pt;
+      }
+      @font-face{
+        font-family: "title";
+        src: url("Fonts/Kroftsmann.ttf");
+      }
+
+      @font-face{
+        font-family: "nav_head";
+        src: url("./assets/fonts/TrueType/SFButtacupLettering-BoldObl.ttf");
+      }
+       @font-face{
+        font-family: "settingfont";
+        src: url("Fonts/Aurach_Bi.ttf");
+      }
+
+    </style>
+  </head>
+  <body>
+    <div id = "gearHold">
+      <div id = "iconHolder">
+        <img src ="./assets/images/gear_icon.png" alt = "gearIcon" id = "gearPic">
+      </div>
+    </div>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js">
+    </script>
+    <script type ="text/javascript"></script>
+    <script>
+       $(document).ready(function(){
+        var showSettings = false;
+        var notMethod;
+        var notFreq;
+        var settingsBar = $("<div></div>");
+        var notifSwitch = $("<h4 class = \"setHeadings\" id = \"notHead\">Notifications</h4><input type=\"range\" min =\"0\" max =\"1\" value=\"1\" class = \"slider\">");
+        var notifMethod = $("<div class = \"method_select\"><h4 class =\"setHeadings\">Method</h4><select id = \"optMethod\"> <option value = \"Email\"> Email </option> <option value = \"Phone\">Phone</option></select></div>");
+        var notifFreq = $("<div class = \"method_select\"><h4 class = \"setHeadings\">Frequency</h4><select id = \"optFreq\"><option value = \"Daily\">Daily</option><option value = \"Weekly\">Weekly</option><option value = \"Monthly\">Monthly</option></select></div>")
+
+        var recallNote = $("<div><h3 class = \"setHeadings\"></h3></div>");
+        var buttonHolder = $("<div id = \"buttonHold\"></div>");
+        var buttonSave = $("<div class = \"button\" id = \"butSave\"><h2 class = \"butHeadings\">Save</h2</div>");
+        var buttonCancel = $("<div class = \"button\" id = \"butCancel\"><h2 class = \"butHeadings\">Cancel</h2></div>");
+
+        var hoverStyle = {"cursor":"pointer"};
+        var settingShown = {"display":"block","margin-top":"20px","margin-right":"10px","border":"2px solid white","box-shadow": "0px 0px 6px grey","border-radius":"1px"};
+        var switchStyle = {"border-radius":"5px","opacity":"0.7","height": "15px"};
+        var settingHidden = {"display":"none"};
+        //var sliderStyle = {"width": "25px","height":"25px","border-radius":"50%","cursor":"pointer"};
+        settingsBar.append(notifSwitch);
+        settingsBar.append(notifMethod);
+        settingsBar.append(notifFreq);
+        buttonHolder.append(buttonCancel);
+        buttonHolder.append(buttonSave);
+        settingsBar.append(buttonHolder);
+        //notifSwitch.css(switchStyle);
+        $('#gearHold').append(settingsBar);
+        settingsBar.css(settingHidden);
+
+        $('#gearPic').hover(function(){
+          $('#gearPic').css(hoverStyle);
+          $('#gearPic').click(function(){
+            if(!showSettings){
+             settingsBar.css(settingShown);
+             showSettings = true;
+            }else{
+              settingsBar.css(settingHidden);
+              showSettings = false;
+            }
+          });
+
+          buttonSave.hover(function(){
+            buttonSave.css(hoverStyle);
+            buttonSave.click(function(){
+              notMethod = $("#optMethod").val();
+              notFreq = $("#optFreq").val();
+              console.log(notMethod + "\n" + notFreq);
+            });
+          });
+
+          buttonCancel.hover(function(){
+            buttonCancel.css(hoverStyle);
+            buttonCancel.click(function(){
+              settingsBar.css(settingHidden);
+              showSettings = false;
+            })
+          });
+       });
+      });
+    </script>
+
+  </body>
+</html>

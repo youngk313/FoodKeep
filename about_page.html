@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Food Keep</title>
+
+  <!-- AuthUI API -->
+  <script src="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.js"></script>
+  <link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.css" />
+
+  <!-- Firebase API -->
+  <script src="https://www.gstatic.com/firebasejs/5.5.8/firebase.js"></script>
+
+  <!-- JQuery API -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+  <!-- JQueryUI API and stylesheet -->
+  <link rel="stylesheet" href="./js/jquery-ui/jquery-ui.css">
+  <script src="./js/jquery-ui/jquery-ui.js"></script>
+
+  <!-- Simple modal pop-up handler -->
+  <script src="./js/modal/jquery.leanModal.min.js"></script>
+  <!-- Add date and date object js -->
+  <script src="wip/jsonitem.js"></script>
+
+  <!-- Local stylesheets -->
+  <link rel="stylesheet" href="./css/home_page_style.css">
+  <link rel="stylesheet" href="./css/simple_header.css">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+    integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+</head>
+
+<body id = "addlistpage" onload="waitToLoad()">
+  <div id="simple-header">
+    <div id="logo">FOODKEEP</div>
+    <div id="Snav">
+      <div id="nav-home"><a href="./index.html" class="anchor">Home</a></div>
+      <div id="nav-about" style="border-top: 3px solid #97D6D0;border-bottom: 3px solid white;"><a href="#" class="anchor">About</a></div> 
+      <div id="nav-stats"><a href="./stats_page.html" class="anchor">Stats</a></div>
+      <div id="nav-list"><a
+          href="./add_item_page.html" class="anchor">My List</a></div>
+    </div>
+    <div id="login">
+      <a id="login-anchor" rel="leanModal" name="login-dialog" href="#login-dialog" class="anchor">Login</a>
+      <a href="#" id="logout-anchor" class="anchor">Sign Out</a>
+      <a href="#" class="anchor">Settings</a>
+      <div id="user-greeting" style="color: white; font-weight: bold;"></div>
+    </div>
+  </div>
+
+  <div id="content">
+    <div id="login-dialog">
+      <div id="firebaseui-auth-container"></div>
+    </div>
+
+  <div class = "modal-content" id = "setting-pop">
+    </div>
+    <div id = "about" class = "jumbotron text-center">
+      <h1 class = "aboutHeading" style = "margin-top: 60px; font-size: 32pt" >Our Mission</h1>
+      <h2 class = "aboutHeading" style = "margin-bottom: 70px">Reducing food waste <em>together</em>.</h2>
+
+      <div id = "missBackground">
+
+          <p id = "missionStatement">  <img id = "aboutPic" src = "./assets/images/waste1.jpg" alt = "waste"> At FoodKeep, we are passionate about reducing food waste. Food waste is a prevalent issue that we know is relatable to everyone. Canadians waste 123 kg of food per capita annually which places Canada as the 12<sup><sm>th</sm></sup> most wasteful country in the world. Our goal is to curb the amount of food that is wasted by Canadians by giving them a tool that can help change their habits regarding the purchase, storage, and disposal of food. 
+          <br/><br/>
+          We understand that people are busy with work, family, and other responsibilities, making it difficult to keep track of smaller priorities in life such as groceries. As a solution, we provided users with a quick and convenient way to reduce waste and to minimize their spending. 
+          <br/></br/>
+          FoodKeep is a web application that allows users to create a personalized list of food items that they can keep track of. Users can choose from a list of commonly purchased items that we have compiled. Our application calculates the expiry date of the added item, displays the date to the user, and alerts the user when the item is close to expiration. We hope users use FoodKeep as a means to change their attitude and behavior about food waste day by day and feel that their actions have impacts on raising awareness and tackling the issue in a meaningful way.
+          </p>
+      </div>
+    </div>
+  </div>
+
+   <footer style = "margin-top: 120px" id="footy" class="text-center">
+    <a class="up-arrow" href="#homePage" data-toggle="tooltip" title="TO TOP"><span style="color:white"
+        class="glyphicon glyphicon-chevron-up"></span></a><br /><br />
+    <h4>Corporate Policy &emsp; | &emsp; Terms & Conditions &emsp; | &emsp; Accessibility</h4>
+    <div class="container-fluid">
+      <h4 style="display:inline-block">Stay Connected &emsp;</h4>
+      <img style="width:3.5vh" src="./assets/images/facebook.png" alt="facebook" class="img-circle">
+      <img style="width:3.5vh" src="./assets/images/twitter.png" alt="twitter" class="img-circle">
+      <img style="width:3.5vh" src="./assets/images/insta.png" alt="instagram" class="img-circle">
+      <img style="width:3.5vh" src="./assets/images/pinterest.png" alt="pinterest" class="img-circle">
+    </div>
+    <br />
+    <p>FoodKeep &copy</p>
+    <br />
+  </footer>
+
+  <script src="./js/database/setup_firebase.js"></script>
+  <script src="./js/database/on_login_events.js"></script>
+
+  <!-- LeanModal login dialog pop-up -->
+  <script>
+    $("#login-anchor").leanModal();
+  </script>
+</body>
+
+</html>
+  
+
+  

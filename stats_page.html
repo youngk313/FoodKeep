@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>FoodKeep</title>
+	<meta charset="utf-8" />
+
+	<!-- AuthUI API -->
+	<script src="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.js"></script>
+	<link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.css" />
+
+	<!-- Firebase API -->
+	<script src="https://www.gstatic.com/firebasejs/5.5.8/firebase.js"></script>
+
+	<!-- JQuery API -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+	<!-- JQueryUI API and stylesheet -->
+	<link rel="stylesheet" href="./js/jquery-ui/jquery-ui.css">
+	<script src="./js/jquery-ui/jquery-ui.js"></script>
+
+	<!-- Simple modal pop-up handler -->
+	<script src="./js/modal/jquery.leanModal.min.js"></script>
+
+	<!-- Charts.js API -->
+	<script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+	<script src="./js/graphs/util.js"></script>
+
+	<!-- Local stylesheets -->
+
+	<link rel="stylesheet" href="./css/stats_style.css">
+	<link rel="stylesheet" href="./css/simple_header.css">
+	<link rel="stylesheet" href="./css/item_loader_style.css">
+</head>
+
+<body onload="waitToLoad()">
+	<div id="simple-header">
+		<div id="logo">FOODKEEP</div>
+		<div id="Snav">
+			<div id="nav-home"><a href="./index.html" class="anchor">Home</a></div>
+			<div id="nav-about"><a href="./about_page.html" class="anchor">About</a></div> 
+			<div id="nav-stats" style="border-top: 3px solid #97D6D0;border-bottom: 3px solid white;"><a
+					href="./stats_page.html" class="anchor">Stats</a></div>
+			<div id="nav-list"><a href="./add_item_page.html" class="anchor">My List</a></div>
+		</div>
+		<div id="login">
+			<a id="login-anchor" rel="leanModal" name="login-dialog" href="#login-dialog" class="anchor">Login</a>
+			<a href="#" id="logout-anchor" class="anchor">Sign Out</a>
+			<a href="#" class="anchor">Settings</a>
+			<div id="user-greeting" style="color: white; font-weight: bold;"></div>
+		</div>
+	</div>
+	<div id="login-dialog" title="Log In">
+		<div id="firebaseui-auth-container"></div>
+	</div>
+	<div id="content">
+
+		<div id="graphTitle" style="display:none;">
+			<!-- Graph title or error message goes here -->
+		</div>
+		<div id="graph-container">
+			<div id="loader"></div>
+			<div id="graph">
+				<canvas id="chart-0"></canvas>
+			</div>
+		</div>
+	</div>
+	<!-- Firebase linking and auth scripts -->
+	<script src="./js/database/setup_firebase.js"></script>
+	<script src="./js/database/on_login_events.js"></script>
+
+	<!-- Graph generation script -->
+	<script src="./js/graph_scripts.js"></script>
+	<script src="./js/stats_load_anim.js"></script>
+	<script>
+		firebase.auth().onAuthStateChanged(function (user) {
+			if(user) {
+				$('#graph').show();
+			} else {
+      			$('#graph').hide();
+      		}
+		});
+
+	</script>
+	<!-- LeanModal login dialog pop-up -->
+	<script>
+		$("#login-anchor").leanModal();
+	</script>
+</body>
+
+</html>

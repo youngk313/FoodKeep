@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Food Keep</title>
+
+  <!-- AuthUI API -->
+  <script src="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.js"></script>
+  <link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.css" />
+
+  <!-- Firebase API -->
+  <script src="https://www.gstatic.com/firebasejs/5.5.8/firebase.js"></script>
+
+  <!-- JQuery API -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+  <!-- JQueryUI API and stylesheet -->
+  <link rel="stylesheet" href="./js/jquery-ui/jquery-ui.css">
+  <script src="./js/jquery-ui/jquery-ui.js"></script>
+
+  <!-- Simple modal pop-up handler -->
+  <script src="./js/modal/jquery.leanModal.min.js"></script>
+
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+  <!-- Add date and date object js -->
+  <script src="wip/jsonitem.js"></script>
+
+  <!-- Local stylesheets -->
+  <link rel="stylesheet" href="./css/add_item_style.css">
+  <link rel="stylesheet" href="./css/simple_header.css">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+    integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+  <link rel="stylesheet" href="./css/item_loader_style.css">
+</head>
+
+<body id = "addlistpage" onload="waitToLoad()">
+  <div id="simple-header">
+    <div id="logo">FOODKEEP</div>
+    <div id="Snav">
+      <div id="nav-home"><a href="./index.html" class="anchor">Home</a></div>
+      <div id="nav-about"><a href="./about_page.html" class="anchor">About</a></div> 
+      <div id="nav-stats"><a href="./stats_page.html" class="anchor">Stats</a></div>
+      <div id="nav-list" style="border-top: 3px solid #97D6D0;border-bottom: 3px solid white;"><a
+          href="./add_item_page.html" class="anchor">My List</a></div>
+    </div>
+    <div id="login">
+      <a id="login-anchor" rel="leanModal" name="login-dialog" href="#login-dialog" class="anchor">Login</a>
+      <a href="#" id="logout-anchor" class="anchor">Sign Out</a>
+      <a href="#" class="anchor">Settings</a>
+      <div id="user-greeting" style="color: white; font-weight: bold;"></div>
+    </div>
+  </div>
+
+  <div id="content">
+    <div id="login-dialog">
+      <div id="firebaseui-auth-container"></div>
+    </div>
+    <div id="transparent-bg">
+    <div id="add-item-menu">
+
+      <!-- Collapsable Menu -->
+      <a class="dairy spoiler spoiler-button">Dairy</a>
+      <div class="dairy-item choice"><a id="milk-regular" class="choice-button">2% Milk</a></div>
+      <div class="dairy-item choice"><a id="milk-coconut" class="choice-button">Coconut Milk</a></div>
+      <div class="dairy-item choice"><a id="milk-soy" class="choice-button">Soy Milk</a></div>
+      <div class="dairy-item choice"><a id="yoghurt" class="choice-button">Yoghurt</a></div>
+
+      <a class="fruits spoiler spoiler-button">Fruits</a>
+      <div class="fruits-item choice"><a id="apple" class="choice-button">Apple</a></div>
+      <div class="fruits-item choice"><a id="orange" class="choice-button">Orange</a></div>
+      <div class="fruits-item choice"><a id="banana" class="choice-button">Banana</a></div>
+      <div class="fruits-item choice"><a id="pear" class="choice-button">Pear</a></div>
+
+      <a class="veggies spoiler spoiler-button">Veggies</a>
+      <div class="veggies-item choice"><a id="asparagus" class="choice-button">Asparagus</a></div>
+      <div class="veggies-item choice"><a id="eggplant" class="choice-button">Eggplant</a></div>
+      <div class="veggies-item choice"><a id="broccoli" class="choice-button">Broccoli</a></div>
+      <div class="veggies-item choice"><a id="rottonFlesh" class="choice-button">Rotten Flesh</a></div>
+    </div>
+  </div>
+
+    <div id="item-list" style="margin:0;">
+      <div id = "anchortop">
+        <h1 style = "color:grey; font-size: 2em;" id = "page-heading"></h1>
+      </div>
+      <div id = "scrollbottom">
+          <a id="scrollToBottom"><i class="fas fa-chevron-circle-down"></i></a>
+      </div>
+      <!-- New list item entry template -->
+      <div class="list-item" id="template">
+        <div class="list-item-entry">
+          <div class="list-item-name"></div>
+          <div class="list-item-date"></div>
+        </div>
+        <div class="list-remove-button"><a class="remove-button"><i class="far fa-trash-alt"></i></a></div>
+      </div>
+      <div id="loader"></div>
+      <div id="item-container" style="display:none;" class="animate-bottom">
+        <!-- New list items go here! -->
+     
+      </div>
+       <div id = "anchorbottom" tabindex="-1">
+         
+      </div>
+        <div id = "scrolltop">
+          <a id="scrollToTop"><i class="fas fa-chevron-circle-up"></i></a>
+        </div>
+    </div>
+  </div>
+
+  <!------------- SCRIPTS ------------->
+  <!-- Scroll to top function -->
+  <script>
+  $( "#scrollToTop" ).click(function() {
+      $('#item-list').scrollTop(0);
+    });
+  
+</script>
+<script>
+   $( "#scrollToBottom" ).click(function() {
+      $('#anchorbottom').focus();
+    });
+</script>
+
+  <!-- Firebase linking and auth scripts -->
+  <script src="./js/database/setup_firebase.js"></script>
+  <script src="./js/database/on_login_events.js"></script>
+
+  <!-- Item list and expiry date logic scripts -->
+  <script src="./js/item_expiry_handler.js"></script>
+
+  <!-- Item load event handler -->
+  <script src="./js/item_load_anim.js"></script>
+
+  <!-- LeanModal login dialog pop-up -->
+  <script>
+    $("#login-anchor").leanModal();
+  </script>
+
+  <!-- Ensures user login to add items -->
+  <script>
+    $(document).ready(function (){
+      firebase.auth().onAuthStateChanged(function (user) {
+        console.log(user);
+        if(user) {
+          $('#add-item-menu').show();
+           $('#scrolltop').show();
+            $('#scrollbottom').show();
+            $('#transparent-bg').show();
+            $('#page-heading').html("My Item List");
+        } else {
+          $('#add-item-menu').hide();
+              $('#scrolltop').hide();
+            $('#scrollbottom').hide();
+            $('#transparent-bg').hide();
+            $('#page-heading').html("Please Log In!");        
+        }
+      });
+});
+  </script>
+  <!-- Event handler for menu collapse -->
+  <script>
+    $('.spoiler').click(function () {
+      let item = $(this).attr('class').split(' ')[0];
+      $(this).parents('#add-item-menu').find('.' + item + '-item').fadeToggle();
+    });
+  </script>
+
+
+
+</body>
+
+</html>

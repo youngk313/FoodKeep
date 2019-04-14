@@ -1,0 +1,83 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto');
+
+body {
+  font-family: 'Roboto', sans-serif;
+}
+
+#simple-header {
+  display: flex;
+  height: 75px;
+  text-align: center;
+  background: #97D6D0;
+  color: white;
+  font-size: 1.2em;
+}
+/* vidhi color #97D6D0 */
+#logo, #Snav, #login {
+  font-family: 'Roboto', sans-serif;
+  padding: 1em !important;
+  display: flex;
+  align-items: center;
+}
+
+#Snav > div {
+  display: flex;
+  align-items: center;
+  height: 75px;
+  box-sizing: border-box;
+  margin: 0 1em 0 1em;
+}
+#Snav {
+  width: 50vw;
+}
+
+#logo {
+  width: 20vw;
+  font-size: 1.5em;
+  justify-content: center;
+  font-weight: bold;
+}
+
+#login {
+  width: 30vw;
+  justify-content: center;
+}
+
+.anchor {
+  color: white;
+  text-decoration: none; 
+}
+
+.anchor:hover {
+  color: #CDD1DC;
+}
+
+#login > .anchor, #user-greeting {
+  margin: 0 1em 0 1em;
+}
+
+#logout-anchor {
+  display: none;
+}
+
+#login-anchor {
+  display: none;
+}
+
+/* Login pop-up style start */
+#lean_overlay {
+  position: fixed;
+  z-index:100;
+  top: 0px;
+  left: 0px;
+  height:100%;
+  width:100%;
+  background: #000;
+  display: none;
+}
+
+#login-dialog {
+  display: none;
+  width: 350px;
+}
+/* Login pop-up style end */
